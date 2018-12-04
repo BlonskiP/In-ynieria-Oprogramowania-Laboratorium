@@ -201,7 +201,24 @@ public class Facade {
     
     public void CancelReservation(Reservation reservation)
     {
+        Date today = new Date();
+        int noOfDays = 14; //i.e two weeks
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);            
+        calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
+        Date date = calendar.getTime();
         
+        if(client.reservationList.get(id) != null){                          // sprzwdzenie czy rezerwacja faktycznie istnieje
+            if(client.reservationList.get(id).date.compareTo(today) < 0){    // sprzwdzenie czy są 2 tygodnie przed
+                client.reservationList.remove(id);                           // date.compareTo(_date) jest mniejsze, 
+            }
+            else{
+                System.out.print("Minął okres rezerwacji.");
+            }
+        }
+        else{
+            System.out.print("Brak rezerwacji o podanym numerze.");
+        }
     }
     
     public void DeleteClient()
