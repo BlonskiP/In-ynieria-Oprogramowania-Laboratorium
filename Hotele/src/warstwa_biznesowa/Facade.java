@@ -23,38 +23,37 @@ public class Facade {
     public Facade()
     {
         factory = new Factory();
-        client = new Client("test@gmail.com", "haslo", "Jan", "Nowak", "Wroclaw");
         cityList = new ArrayList<City>();
         clientList = new ArrayList<Client>();
     }
+    
     public static void main(String[] args)
     {
         Facade facade = new Facade();
-        
+       
+        Client client = facade.factory.CreateClient("test@gmail.com", "haslo");
+        facade.clientList.add(client);
         
         // dodawanie miasta
-        facade.AddCity("Wrocław");
-        for(City city : facade.cityList)
+        City city = facade.AddCity("Wrocław");
+        for(City loopCity : facade.cityList)
         {
-            System.out.println(city.name);
+            System.out.println(loopCity.name);
         }
         
         // dodawanie hotelu
-        facade.AddHotel("Wrocław", "Hotel 5 Gwiazdkowy", "Plac Grunwaldzki 1");
-        
-        City city = facade.FindCity("Wrocław");
-        for(Hotel hotel : city.hotelList)
+        Hotel hotel = facade.AddHotel("Wrocław", "Hotel 5 Gwiazdkowy");
+        for(Hotel loopHotel : city.hotelList)
         {
-            System.out.println(hotel.name);
+            System.out.println(loopHotel.name);
+            hotel.roomList.add(new Room(2, 100));
         }
         
         // dodawanie pokoju
-        facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 2, "Opis", 100);
-        
-        Hotel hotel = city.FindHotel("Hotel 5 Gwiazdkowy");
-        for(Room room : hotel.roomList)
+        //facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 2, 100)
+        for(Room loopRoom : hotel.roomList)
         {
-            System.out.println("Rozmiar: " + room.size + " | Cena: " + room.price + " | Opis: " + room.description);
+            System.out.println(loopRoom.size + " " + loopRoom.price);
         }
         
         // rezerwacja
@@ -65,64 +64,54 @@ public class Facade {
         calendar.setTime(date);
         calendar.add(Calendar.WEEK_OF_MONTH, 3);
         date = calendar.getTime();
-    
-        facade.MakeReservation("Wrocław", "Hotel 5 Gwiazdkowy", 2, date); // powinien byc success
-        facade.MakeReservation("Wrocław", "Hotel 5 Gwiazdkowy", 2, date); // powinien byc Error
-
-        // anulowanie
-        //facade.CancelReservation("Wrocław", "Hotel 5 Gwiazdkowy", 2, date);
+        
+        boolean test;
+        test = facade.MakeReservation("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
+        System.out.println(test); // powinien byc true
+        test = facade.MakeReservation("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
+        System.out.println(test); // powinien byc false
     }
     
-    public boolean AddCity(String name)
+    public City AddCity(String name)
     {
-        if(FindCity(name) == null)
+        City city = factory.CreateCity(name);
+        
+        if(this.FindCity(city) == null)
         {
-            City city = factory.CreateCity(name);
             cityList.add(city);
-            return true;
+            return city;
         }
         
-        return false;
+        return null;
     }
     
-    public boolean AddHotel(String cityName, String name, String address)
+    public Hotel AddHotel(String cityName, String name)
     {
-        City city;
-        //Walidacja
-        if(name == null)
+        City cityTemp = factory.CreateCity(cityName), city;
+        if((city = this.FindCity(cityTemp)) == null)
         {
-            System.out.println("[ERROR] Błąd danych!");
-            return false;
+            city = this.AddCity(cityName);
         }
         
-        if(this.FindCity(cityName) == null)
-        {
-            AddCity(cityName);
-        }
-        
-        city = FindCity(cityName);
-        
+        /*Hotel hotel = factory.CreateCity(cityName);
         if(city.FindHotel(name) != null)
         {
             System.out.println("[ERROR] Taki Hotel już istnieje!");
             return false;
-        }
+        }*/
         
-        Hotel hotel = factory.CreateHotel(name, cityName);
+        Hotel hotel = factory.CreateHotel(name);
         city.AddHotel(hotel);
-        System.out.println("[SUCCESS] Hotel został dodany prawidłowo - Fasada");
-        return true;
+        return hotel;
     }
     
-    public boolean AddRoom(String cityName, String hotelName, int size, String desc, int price)
+    public boolean AddRoom(String cityName, String hotelName, int size, int price)
     {
-        Room room = factory.CreateRoom(desc, size, price);
-           
-        City city = this.FindCity(cityName);
-        if(city == null)
+        Room room = factory.CreateRoom(size, price);
+        /*City cityTemp = factory.CreateCity(cityName), city;
+        if((city = this.FindCity(cityTemp)) == null)
         {
-            System.out.println("[ERROR] Nie ma miasta");
-            return false;
+            city = this.AddCity(cityName);
         }
         
         Hotel hotel = city.FindHotel(hotelName);
@@ -132,9 +121,8 @@ public class Facade {
             System.out.println("[ERROR] Nie ma hotelu - Fasada FindHotel" );
             return false;
         }
-        
-        hotel.roomList.add(room);
-        System.out.println("[SUCCESS] Dodano pokój do hotelu");
+        */
+        /*hotel.roomList.add(room);*/
         return true;
     }
     
@@ -143,63 +131,47 @@ public class Facade {
         return false;
     }
     
-    public City FindCity(String name)
+    public City FindCity(City city)
     {
-        for(City city : this.cityList) //https://www.baeldung.com/find-list-element-java
-        {
-            if(city.name.equals(name))
-            {
-                return city;
-            }
-        }
+        int index = -1;
+        
+        if((index = this.cityList.indexOf(city)) != -1)
+            return this.cityList.get(index);
         
         return null;
     }
     
-    public Client FindClient()
+    public Client FindClient(Client client)
     {
-        return client;
+        int index = -1;
+        
+        if((index = this.clientList.indexOf(client)) != -1)
+            return this.clientList.get(index);
+        
+        return null;
     }
     
-    public boolean MakeReservation(String cityName, String hotelName, int size, Date date)
+    public boolean MakeReservation(String email, String password, String cityName, String hotelName, int size, int price, Date date)
     {
-        // tutaj poprawić
-        if(this.FindClient() == null)
+        Client client;
+        City city;
+        
+        Client clientTemp = factory.CreateClient(email, password);
+        if((client = this.FindClient(clientTemp)) == null)
         {
-            System.out.println("[ERROR] Nie ma klienta");
+            return false;
+        }
+     
+        City cityTemp = factory.CreateCity(cityName);
+        if((city = this.FindCity(cityTemp)) == null)
+        {
             return false;
         }
         
-        City city = this.FindCity(cityName);
-        if(city == null)
-        {
-            System.out.println("[ERROR] Nie ma miasta");
-            return false;
-        }
-        
-        Hotel hotel = city.FindHotel(hotelName);
-        if(hotel == null) // dopytać czy to porównanie ma być w klasie City tak jak na diagramie
-        {
-            System.out.println("[ERROR] Nie ma hotelu");
-            return false;
-        }
-        
-        Room room = hotel.FindRoom(size, date);
-        if(room == null)
-        {
-            System.out.println("[ERROR] Nie ma pokoju w tym terminie");
-            return false;
-        }
-        
-        Reservation reservation = factory.CreateReservation(date, client);
-        room.reservationList.add(reservation);
-        client.reservationList.add(reservation);
-
-        System.out.println("[SUCCESS] Rezerwacja została dokonana");
-        return true;
+        return city.Reserve(client, hotelName, date, size, price);
     }
     
-    public void CancelReservation(Reservation reservation)
+    public void CancelReservation(int id)
     {
         if(client.reservationList.get(id) != null)          // sprzwdzenie czy rezerwacja faktycznie istnieje
         {         
@@ -213,7 +185,7 @@ public class Facade {
             
             if(date.compareTo(today) < 0)                   // sprzwdzenie czy są 2 tygodnie przed
             {                                               // date.compareTo(_date) jest mniejsze od 0 gdy dzisiejsza data jest mniejsza o więcej niż 2 tygodnie od daty pobytu
-                client.reservationList.remove(id);           
+                client.reservationList.remove(id);
             }
             else{
                 System.out.print("Minął okres rezerwacji.");

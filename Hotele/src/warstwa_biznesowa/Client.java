@@ -22,13 +22,10 @@ public class Client {
     
     public List<Reservation> reservationList;
     
-    public Client(String email, String password, String firstName, String lastName, String address)
+    public Client(String email, String password)
     {
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
         
         reservationList = new ArrayList<Reservation>();
     }
@@ -96,5 +93,12 @@ public class Client {
     public boolean CheckPassword(String password)
     {
         return true;
+    }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        Client client = (Client) o;
+        return this.email.equals(client.email);
     }
 }

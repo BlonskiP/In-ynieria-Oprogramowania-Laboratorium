@@ -6,6 +6,7 @@
 package warstwa_biznesowa;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,6 @@ public class City {
     public City(String name)
     {
         this.name = name;
-        this.country = null;
         
         hotelList = new ArrayList<Hotel>();
     }
@@ -53,21 +53,46 @@ public class City {
     
     public boolean AddHotel(Hotel hotel)
     {
-        
-        hotelList.add(hotel);
-        System.out.println("[SUCCESS] Hotel został dodany prawidłowo - City");
+        this.hotelList.add(hotel);
         return true;
     }
     
-    public Hotel FindHotel(String name)
-    {   System.out.println("Szukam Hotelu");
-        for(Hotel hotel : this.hotelList) //https://www.baeldung.com/find-list-element-java
-        {System.out.println(hotel.name);
-            if(hotel.name.equals(name))
-            {
-                return hotel;
-            }
-        }
+    public Hotel FindHotel(Hotel hotel)
+    {
+        int index = -1;
+        
+        if((index = this.hotelList.indexOf(hotel)) != -1)
+            return this.hotelList.get(index);
+        
         return null;
+    }
+    
+    public boolean Reserve(Client client, String hotelName, Date date, int size, int price)
+    {
+        Factory factory = new Factory();
+        
+        Hotel hotel;
+        Hotel hotelTemp = factory.CreateHotel(hotelName);
+        if((hotel = this.FindHotel(hotelTemp)) == null)
+        {
+            return false;
+        }
+        
+        Reservation reservation = hotel.Reserve(client, date, size, price);
+
+        if(reservation != null)
+        {
+            client.reservationList.add(reservation);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        City city = (City) o;
+        return this.name.equals(city.name);
     }
 }

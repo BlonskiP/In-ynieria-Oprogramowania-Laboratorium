@@ -14,10 +14,25 @@ import java.util.Date;
 public class Reservation {
     public Date date;
     private Client client;
+    private Room room;
     
-    public Reservation(Date date, Client client)
+    public Reservation(Date date, Client client, Room room)
     {
         this.date = date;
         this.client = client;
+        this.room = room;
+    }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        Reservation reservation = (Reservation) o;
+        
+        if(this.date.compareTo(reservation.date) != 0)
+            return false;
+        
+        if(!this.room.equals(reservation.room))
+            return false;
+        return true;
     }
 }

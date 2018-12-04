@@ -22,10 +22,9 @@ public class Hotel {
     
     public List<Room> roomList;
    
-    public Hotel(String name, String address)
+    public Hotel(String name)
     {
         this.name = name;
-        this.address = address;
         
         roomList = new ArrayList<Room>();
     }
@@ -80,19 +79,34 @@ public class Hotel {
         return this.roomList;
     }
     
-    public Room FindRoom(int size, Date date)
+    public Room FindRoom(Room room)
     {
-        for(Room room : roomList)
-        {
-            if(room.size == size)
-            {
-                if(room.GetReservation(date) == null)
-                {
-                    return room;
-                }
-            }
-        }
+        int index = -1;
+        
+        if((index = this.roomList.indexOf(room)) != -1)
+            return this.roomList.get(index);
         
         return null;
+    }
+    
+    public Reservation Reserve(Client client, Date date, int size, int price)
+    {
+        Factory factory = new Factory();
+
+        Room room;
+        Room roomTemp = factory.CreateRoom(size, price);
+        if((room = this.FindRoom(roomTemp)) == null)
+        {
+            return null;
+        }
+        
+        return room.Reserve(client, date);
+    }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        Hotel hotel = (Hotel) o;
+        return this.name.equals(hotel.name);
     }
 }

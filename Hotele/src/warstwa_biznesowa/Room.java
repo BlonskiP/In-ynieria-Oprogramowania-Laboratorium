@@ -21,9 +21,8 @@ public class Room {
     
     public List<Reservation> reservationList;
     
-    public Room(String desc, int size, int price)
+    public Room(int size, int price)
     {
-        this.description = desc;
         this.size = size;
         this.price = price;
         
@@ -70,16 +69,34 @@ public class Room {
         return this.reservationList;
     }
     
-    public Reservation GetReservation(Date date)
+    public Reservation FindReservation(Reservation reservation)
     {
-        for(Reservation reservation : reservationList)
-        {
-            if(reservation.date.compareTo(date) == 0)
-            {
-                return reservation;
-            }
-        }
+        int index = -1;
+        
+        if((index = this.reservationList.indexOf(reservation)) != -1)
+            return this.reservationList.get(index);
         
         return null;
+    }  
+    
+    public Reservation Reserve(Client client, Date date)
+    {
+        Factory factory = new Factory();
+        
+        Reservation reservation = factory.CreateReservation(date, client, this);
+        if(this.FindReservation(reservation) != null)
+        {
+            return null;
+        }
+
+        this.reservationList.add(reservation);
+        return reservation;
+    }
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        Room room = (Room) o;
+        return this.size == room.size && this.price == room.price;
     }
 }

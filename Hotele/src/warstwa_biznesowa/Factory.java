@@ -13,23 +13,29 @@ import java.util.Date;
  */
 public class Factory {
     Factory(){};
-    public Hotel CreateHotel(String name, String address ){
-        return new Hotel(name, address);
-    };
-    public City CreateCity(String name){return new City(name);};
     
-    public Room CreateRoom(String desc, int size, int price)
+    public City CreateCity(String name)
     {
-        return new Room(desc, size, price);
+        return new City(name);
     }
     
-    public Client CreateClient(String email, String pass, String firstName, String lastName, String address)
+    public Hotel CreateHotel(String name)
     {
-        return new Client(email, pass, firstName, lastName, address);
+        return new Hotel(name);
     }
     
-    public Reservation CreateReservation(Date date, Client client)
+    public Room CreateRoom(int size, int price)
     {
-        return new Reservation(date, client); 
+        return new Room(size, price);
+    }
+    
+    public Client CreateClient(String email, String password)
+    {
+        return new Client(email, password);
+    }
+    
+    public Reservation CreateReservation(Date date, Client client, Room room)
+    {
+        return new Reservation(date, client, room); 
     }
 }
