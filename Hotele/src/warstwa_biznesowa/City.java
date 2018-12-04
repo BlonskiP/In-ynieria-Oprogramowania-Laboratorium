@@ -51,10 +51,9 @@ public class City {
         return this.hotelList;
     }
     
-    public boolean AddHotel(Hotel hotel)
+    public void AddHotel(Hotel hotel)
     {
         this.hotelList.add(hotel);
-        return true;
     }
     
     public Hotel FindHotel(Hotel hotel)

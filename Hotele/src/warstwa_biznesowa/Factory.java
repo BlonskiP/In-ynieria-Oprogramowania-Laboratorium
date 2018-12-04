@@ -14,6 +14,11 @@ import java.util.Date;
 public class Factory {
     Factory(){};
     
+    public Client CreateClient(String email, String password)
+    {
+        return new Client(email, password);
+    }
+    
     public City CreateCity(String name)
     {
         return new City(name);
@@ -27,11 +32,6 @@ public class Factory {
     public Room CreateRoom(int size, int price)
     {
         return new Room(size, price);
-    }
-    
-    public Client CreateClient(String email, String password)
-    {
-        return new Client(email, password);
     }
     
     public Reservation CreateReservation(Date date, Client client, Room room)

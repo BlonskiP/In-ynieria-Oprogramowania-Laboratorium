@@ -105,7 +105,7 @@ public class Facade {
         return hotel;
     }
     
-    public boolean AddRoom(String cityName, String hotelName, int size, int price)
+    public Room AddRoom(String cityName, String hotelName, int size, int price)
     {
         Room room = factory.CreateRoom(size, price);
         /*City cityTemp = factory.CreateCity(cityName), city;
@@ -123,12 +123,12 @@ public class Facade {
         }
         */
         /*hotel.roomList.add(room);*/
-        return true;
+        return room;
     }
     
-    public boolean AddClient(String email, String password)
+    public Client AddClient(String email, String password)
     {
-        return false;
+        return null;
     }
     
     public City FindCity(City city)
