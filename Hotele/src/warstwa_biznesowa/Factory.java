@@ -13,7 +13,9 @@ import java.util.Date;
  */
 public class Factory {
     Factory(){};
-    public Hotel CreateHotel(String name, String cityName ){return new Hotel(cityName, name);};
+    public Hotel CreateHotel(String name, String address ){
+        return new Hotel(name, address);
+    };
     public City CreateCity(String name){return new City(name);};
     
     public Room CreateRoom(String desc, int size, int price)
