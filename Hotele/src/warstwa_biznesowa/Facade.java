@@ -41,6 +41,7 @@ public class Facade {
     
     public boolean AddHotel(String cityName, String name, String address)
     {
+        City city;
         //Walidacja
         if(name == null)
         {
@@ -53,7 +54,7 @@ public class Facade {
             AddCity(cityName);
         }
         
-        City city = FindCity(cityName);
+        city = FindCity(cityName);
         
         if(city.FindHotel(name) != null)
         {
@@ -61,7 +62,8 @@ public class Facade {
             return false;
         }
         
-        city.AddHotel(name, address);
+        Hotel hotel = factory.CreateHotel(name, cityName);
+        city.AddHotel(hotel);
         System.out.println("[SUCCESS] Hotel został dodany prawidłowo - Fasada");
         return true;
     }
@@ -78,9 +80,10 @@ public class Facade {
         }
         
         Hotel hotel = city.FindHotel(hotelName);
+        System.out.println("Szukam hotelu");
         if(hotel == null)
         {
-            System.out.println("[ERROR] Nie ma hotelu");
+            System.out.println("[ERROR] Nie ma hotelu - Fasada FindHotel" );
             return false;
         }
         

@@ -51,18 +51,18 @@ public class City {
         return this.hotelList;
     }
     
-    public boolean AddHotel(String name, String address)
+    public boolean AddHotel(Hotel hotel)
     {
-        Hotel hotel = new Hotel(name, address);
+        
         hotelList.add(hotel);
         System.out.println("[SUCCESS] Hotel został dodany prawidłowo - City");
         return true;
     }
     
     public Hotel FindHotel(String name)
-    {
+    {   System.out.println("Szukam Hotelu");
         for(Hotel hotel : this.hotelList) //https://www.baeldung.com/find-list-element-java
-        {
+        {System.out.println(hotel.name);
             if(hotel.name.equals(name))
             {
                 return hotel;
