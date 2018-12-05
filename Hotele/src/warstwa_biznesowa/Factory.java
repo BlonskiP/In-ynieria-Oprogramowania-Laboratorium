@@ -29,9 +29,9 @@ public class Factory {
         return new Hotel(name);
     }
     
-    public Room CreateRoom(int size, int price)
+    public Room CreateRoom(int number, int size, int price)
     {
-        return new Room(size, price);
+        return new Room(number, size, price);
     }
     
     public Reservation CreateReservation(Date date, Client client, Room room)

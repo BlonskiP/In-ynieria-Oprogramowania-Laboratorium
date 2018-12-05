@@ -14,6 +14,7 @@ import java.util.List;
  * @author Cezary
  */
 public class Room {
+    protected int number;
     protected String description;
     protected int size;
     protected int price;
@@ -21,8 +22,9 @@ public class Room {
     
     public List<Reservation> reservationList;
     
-    public Room(int size, int price)
+    public Room(int number, int size, int price)
     {
+        this.number = number;
         this.size = size;
         this.price = price;
         
@@ -93,10 +95,20 @@ public class Room {
         return reservation;
     }
     
+    public boolean CompareAttributes(int size, int price)
+    {
+        if(this.size != size || this.price != price)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
     @Override
     public boolean equals(Object o)
     {
         Room room = (Room) o;
-        return this.size == room.size && this.price == room.price;
+        return this.number == room.number;
     }
 }

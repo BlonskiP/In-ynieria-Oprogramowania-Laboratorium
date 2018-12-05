@@ -46,7 +46,7 @@ public class Facade {
         for(Hotel loopHotel : city.hotelList)
         {
             System.out.println(loopHotel.name);
-            hotel.roomList.add(new Room(2, 100));
+            hotel.roomList.add(new Room(1, 2, 100));
         }
         
         // dodawanie pokoju
@@ -105,9 +105,9 @@ public class Facade {
         return hotel;
     }
     
-    public Room AddRoom(String cityName, String hotelName, int size, int price)
+    public Room AddRoom(String cityName, String hotelName, int number, int size, int price)
     {
-        Room room = factory.CreateRoom(size, price);
+        Room room = factory.CreateRoom(number, size, price);
         /*City cityTemp = factory.CreateCity(cityName), city;
         if((city = this.FindCity(cityTemp)) == null)
         {

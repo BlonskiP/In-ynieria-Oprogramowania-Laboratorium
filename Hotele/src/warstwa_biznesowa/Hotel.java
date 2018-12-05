@@ -93,14 +93,20 @@ public class Hotel {
     {
         Factory factory = new Factory();
 
-        Room room;
-        Room roomTemp = factory.CreateRoom(size, price);
-        if((room = this.FindRoom(roomTemp)) == null)
+        for(Room loopRoom : this.roomList)
         {
-            return null;
+            if(loopRoom.CompareAttributes(size, price))
+            {
+                return loopRoom.Reserve(client, date);
+            }
         }
         
-        return room.Reserve(client, date);
+        return null;
+    }
+    
+    public Room AddRoom(int number, int size, int price)
+    {
+        return null;
     }
     
     @Override
