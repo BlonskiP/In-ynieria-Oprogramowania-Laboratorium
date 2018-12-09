@@ -182,7 +182,7 @@ public class Facade {
         }
     }
     
-    public void DeleteClient()
+    public void RemoveClient()
     {
     }
     
