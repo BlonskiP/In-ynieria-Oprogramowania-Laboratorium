@@ -88,10 +88,9 @@ public class City {
         return false;
     }
     
-    @Override
-    public boolean equals(Object o)
-    {
-        City city = (City) o;
-        return this.name.equals(city.name);
-    }
+		 @Override
+		public boolean equals (Object aCity){
+		City city = (City)aCity;
+		return name.equals(city.name);
+		} 
 }
