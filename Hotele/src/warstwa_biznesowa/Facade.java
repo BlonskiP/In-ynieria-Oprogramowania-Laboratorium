@@ -85,7 +85,9 @@ public class Facade {
     
     public Hotel AddHotel(String cityName, String hotelName)
     {
-        City city, cityTemp = factory.CreateCity(cityName);
+        City city;
+        
+        City cityTemp = factory.CreateCity(cityName);
         if((city = this.FindCity(cityTemp)) == null)
         {
             city = this.AddCity(cityName);
