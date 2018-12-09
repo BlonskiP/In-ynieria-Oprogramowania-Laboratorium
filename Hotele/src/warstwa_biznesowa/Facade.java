@@ -65,9 +65,9 @@ public class Facade {
         date = calendar.getTime();
         
         boolean test;
-        test = facade.MakeReservation("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
+        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
         System.out.println(test); // powinien byc true
-        test = facade.MakeReservation("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
+        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
         System.out.println(test); // powinien byc false
     }
     
@@ -134,7 +134,7 @@ public class Facade {
         return null;
     }
     
-    public boolean MakeReservation(String email, String password, String cityName, String hotelName, int size, int price, Date date)
+    public boolean Reserve(String email, String password, String cityName, String hotelName, int size, int price, Date date)
     {
         Client client;
         City city;
