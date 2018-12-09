@@ -131,12 +131,17 @@ public class Facade {
         return null;
     }
     
-    public City FindCity(City city)
+    public City FindCity(String name)
     {
-        int index = -1;
+        City city = factory.CreateCity(name);
+        int index =this.cityList.indexOf(city);
         
-        if((index = this.cityList.indexOf(city)) != -1)
-            return this.cityList.get(index);
+       
+            if(index!=-1){
+            return cityList.get(index);
+            }
+                
+        
         
         return null;
     }
