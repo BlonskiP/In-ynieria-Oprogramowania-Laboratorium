@@ -171,7 +171,7 @@ public class Facade {
         return city.Reserve(client, hotelName, date, size, price);
     }
     
-    public void CancelReservation(int id)
+    public boolean CancelReservation(int id)
     {
         if(client.reservationList.get(id) != null)          // sprzwdzenie czy rezerwacja faktycznie istnieje
         {         
@@ -186,17 +186,43 @@ public class Facade {
             if(date.compareTo(today) < 0)                   // sprzwdzenie czy są 2 tygodnie przed
             {                                               // date.compareTo(_date) jest mniejsze od 0 gdy dzisiejsza data jest mniejsza o więcej niż 2 tygodnie od daty pobytu
                 client.reservationList.remove(id);
+                return true;
             }
             else{
                 System.out.print("Minął okres rezerwacji.");
+                return false;
             }
         }
         else{
             System.out.print("Brak rezerwacji o podanym numerze.");
+            return false;
         }
     }
     
     public void DeleteClient()
     {
+    }
+    
+    // usuwanie miasta
+    public boolean RemoveCity(String cityName) {
+        // pętla po wszystkich miastach, bo (String string : list) nie pójdzie bo klasa, musiałbym pomyśleć ale tak też zadziała
+        for(int i =0; i < cityList.size(); i++) {
+            if(cityList.get(i).name.equals(cityName)) {
+                // sprawdzenie czy miasto ma jakieś hotele
+                if(cityList.get(i).hotelList.isEmpty()) {
+                    cityList.remove(i);
+                    return true;
+                }
+                else {
+                    System.out.print("Błąd. Miasto zawiera hotele.");
+                    return false;
+                }
+            }
+            else {
+                System.out.print("Błąd. Nie znaleziono takiego miasta.");
+                return false;
+            }
+        }
+        return false;
     }
 }
