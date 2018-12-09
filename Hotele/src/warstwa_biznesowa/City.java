@@ -56,14 +56,13 @@ public class City {
         this.hotelList.add(hotel);
     }
     
-    public Hotel FindHotel(Hotel hotel)
+    public Hotel FindHotel(String name)
     {
-        int index = -1;
-        
-        if((index = this.hotelList.indexOf(hotel)) != -1)
-            return this.hotelList.get(index);
-        
-        return null;
+       Hotel hotel = new Hotel(name,null);
+       int index =hotelList.indexOf(hotel);
+       if(index!=-1)
+           return hotelList.get(index);
+       return null;
     }
     
     public boolean Reserve(Client client, String hotelName, Date date, int size, int price)

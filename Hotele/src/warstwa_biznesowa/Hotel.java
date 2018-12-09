@@ -110,9 +110,8 @@ public class Hotel {
     }
     
     @Override
-    public boolean equals(Object o)
-    {
-        Hotel hotel = (Hotel) o;
-        return this.name.equals(hotel.name);
-    }
+    public boolean equals (Object aHotel){
+    Hotel hotel = (Hotel)aHotel;
+    return name.equals(hotel.name);
+    } 
 }
