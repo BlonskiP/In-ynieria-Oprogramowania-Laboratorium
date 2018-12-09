@@ -51,9 +51,18 @@ public class City {
         return this.hotelList;
     }
     
-    public void AddHotel(Hotel hotel)
+    public Hotel AddHotel(String hotelName)
     {
+        Factory factory = new Factory();
+        
+        Hotel hotel = factory.CreateHotel(hotelName);
+        if(this.FindHotel(hotel) != null)
+        {
+            return null;
+        }
+        
         this.hotelList.add(hotel);
+        return hotel;
     }
     
     public Hotel FindHotel(Hotel hotel)
@@ -64,6 +73,20 @@ public class City {
             return this.hotelList.get(index);
         
         return null;
+    }
+    
+    public Room AddRoom(String hotelName, int number, int size, int price)
+    {
+        Factory factory = new Factory();
+        
+        Hotel hotel;
+        Hotel hotelTemp = factory.CreateHotel(hotelName);
+        if((hotel = this.FindHotel(hotelTemp)) == null)
+        {
+            return null;
+        }
+        
+        return hotel.AddRoom(number, size, price);
     }
     
     public boolean Reserve(Client client, String hotelName, Date date, int size, int price)

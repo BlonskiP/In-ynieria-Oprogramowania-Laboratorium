@@ -79,6 +79,20 @@ public class Hotel {
         return this.roomList;
     }
     
+    public Room AddRoom(int number, int size, int price)
+    {
+        Factory factory = new Factory();
+        
+        Room room = factory.CreateRoom(number, size, price);
+        if(this.FindRoom(room) != null)
+        {
+            return null;
+        }
+
+        this.roomList.add(room);
+        return room;
+    }
+    
     public Room FindRoom(Room room)
     {
         int index = -1;
@@ -101,11 +115,6 @@ public class Hotel {
             }
         }
         
-        return null;
-    }
-    
-    public Room AddRoom(int number, int size, int price)
-    {
         return null;
     }
     

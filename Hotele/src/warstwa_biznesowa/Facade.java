@@ -46,11 +46,10 @@ public class Facade {
         for(Hotel loopHotel : city.hotelList)
         {
             System.out.println(loopHotel.name);
-            hotel.roomList.add(new Room(1, 2, 100));
         }
         
         // dodawanie pokoju
-        //facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 2, 100)
+        facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 100, 2, 100);
         for(Room loopRoom : hotel.roomList)
         {
             System.out.println(loopRoom.size + " " + loopRoom.price);
@@ -75,7 +74,6 @@ public class Facade {
     public City AddCity(String name)
     {
         City city = factory.CreateCity(name);
-        
         if(this.FindCity(city) == null)
         {
             cityList.add(city);
@@ -85,45 +83,28 @@ public class Facade {
         return null;
     }
     
-    public Hotel AddHotel(String cityName, String name)
+    public Hotel AddHotel(String cityName, String hotelName)
     {
-        City cityTemp = factory.CreateCity(cityName), city;
+        City city, cityTemp = factory.CreateCity(cityName);
         if((city = this.FindCity(cityTemp)) == null)
         {
             city = this.AddCity(cityName);
         }
         
-        /*Hotel hotel = factory.CreateCity(cityName);
-        if(city.FindHotel(name) != null)
-        {
-            System.out.println("[ERROR] Taki Hotel już istnieje!");
-            return false;
-        }*/
-        
-        Hotel hotel = factory.CreateHotel(name);
-        city.AddHotel(hotel);
-        return hotel;
+        return city.AddHotel(hotelName);
     }
     
     public Room AddRoom(String cityName, String hotelName, int number, int size, int price)
     {
-        Room room = factory.CreateRoom(number, size, price);
-        /*City cityTemp = factory.CreateCity(cityName), city;
+        City city;
+        
+        City cityTemp = factory.CreateCity(cityName);
         if((city = this.FindCity(cityTemp)) == null)
         {
-            city = this.AddCity(cityName);
+            return null;
         }
-        
-        Hotel hotel = city.FindHotel(hotelName);
-        System.out.println("Szukam hotelu");
-        if(hotel == null)
-        {
-            System.out.println("[ERROR] Nie ma hotelu - Fasada FindHotel" );
-            return false;
-        }
-        */
-        /*hotel.roomList.add(room);*/
-        return room;
+
+        return city.AddRoom(hotelName, number, size, price);
     }
     
     public Client AddClient(String email, String password)
