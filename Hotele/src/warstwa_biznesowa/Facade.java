@@ -204,4 +204,25 @@ public class Facade {
     public void DeleteClient()
     {
     }
+    
+        // usuwanie miasta
+    public boolean RemoveCity(String cityName) {
+        City tmp = FindCity(cityName); 
+            // sprawdzenie czy istnieje miasto
+            if(tmp != null) {
+                // sprawdzenie czy miasto ma jakieś hotele
+                if(tmp.hotelList.isEmpty()) {
+                    cityList.remove(tmp);
+                    return true;
+                }
+                else {
+                    System.out.print("Błąd. Miasto zawiera hotele.");
+                    return false;
+                }
+            }
+            else {
+                System.out.print("Błąd. Nie znaleziono takiego miasta.");
+                return false;
+            }
+    }
 }
