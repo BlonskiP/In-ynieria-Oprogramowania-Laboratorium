@@ -112,7 +112,10 @@ public class Hotel {
         {
             if(loopRoom.CompareAttributes(size, price))
             {
-                return loopRoom.Reserve(client, date);
+                if(loopRoom.Reserve(client, date))
+                {
+                    return true;
+                }
             }
         }
         
