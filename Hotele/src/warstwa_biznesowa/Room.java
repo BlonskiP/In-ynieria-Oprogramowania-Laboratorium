@@ -23,6 +23,8 @@ public class Room {
     
     public List<Reservation> reservationList;
     
+    private Factory factory;
+    
     public Room(int number, int size, int price)
     {
         this.number = number;
@@ -30,6 +32,8 @@ public class Room {
         this.price = price;
         
         reservationList = new ArrayList<Reservation>();
+        
+        factory = new Factory();
     }
     
     public void SetDescription(String des)
@@ -82,18 +86,17 @@ public class Room {
         return null;
     }  
     
-    public Reservation Reserve(Client client, Date date)
+    public boolean Reserve(Client client, Date date)
     {
-        Factory factory = new Factory();
-        
         Reservation reservation = factory.CreateReservation(date, client, this);
         if(this.FindReservation(reservation) != null)
         {
-            return null;
+            return false;
         }
-
+        
+        client.reservationList.add(reservation);
         this.reservationList.add(reservation);
-        return reservation;
+        return true;
     }
     
     public boolean CompareAttributes(int size, int price)

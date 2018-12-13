@@ -21,12 +21,16 @@ public class Hotel {
     protected String photo;
     
     public List<Room> roomList;
+    
+    private Factory factory;
    
     public Hotel(String name)
     {
         this.name = name;
         
         roomList = new ArrayList<Room>();
+        
+        factory = new Factory();
     }
     
     public void SetName(String name)
@@ -79,18 +83,17 @@ public class Hotel {
         return this.roomList;
     }
     
-    public Room AddRoom(int number, int size, int price)
+    public boolean AddRoom(int number, int size, int price)
     {
         Factory factory = new Factory();
         
         Room room = factory.CreateRoom(number, size, price);
         if(this.FindRoom(room) != null)
         {
-            return null;
+            return false;
         }
 
-        this.roomList.add(room);
-        return room;
+        return this.roomList.add(room);
     }
     
     public Room FindRoom(Room room)
@@ -103,7 +106,7 @@ public class Hotel {
         return null;
     }
     
-    public Reservation Reserve(Client client, Date date, int size, int price)
+    public boolean Reserve(Client client, Date date, int size, int price)
     {
         Factory factory = new Factory();
 
@@ -115,7 +118,7 @@ public class Hotel {
             }
         }
         
-        return null;
+        return false;
     }
     
     @Override

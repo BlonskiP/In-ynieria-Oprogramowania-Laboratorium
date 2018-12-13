@@ -35,18 +35,23 @@ public class Facade {
         facade.clientList.add(client);
         
         // dodawanie miasta
-        City city = facade.AddCity("Wrocław");
+        facade.AddCity("Wrocław");
         for(City loopCity : facade.cityList)
         {
             System.out.println(loopCity.name);
         }
         
+        
+        City city = facade.FindCity(facade.factory.CreateCity("Wrocław"));
+        
         // dodawanie hotelu
-        Hotel hotel = facade.AddHotel("Wrocław", "Hotel 5 Gwiazdkowy");
+        facade.AddHotel("Wrocław", "Hotel 5 Gwiazdkowy");
         for(Hotel loopHotel : city.hotelList)
         {
             System.out.println(loopHotel.name);
         }
+
+        Hotel hotel = city.FindHotel(facade.factory.CreateHotel("Hotel 5 Gwiazdkowy"));
         
         // dodawanie pokoju
         facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 100, 2, 100);
@@ -71,47 +76,47 @@ public class Facade {
         System.out.println(test); // powinien byc false
     }
     
-    public City AddCity(String name)
+    public boolean AddCity(String name)
     {
         City city = factory.CreateCity(name);
+        
         if(this.FindCity(city) == null)
         {
-            cityList.add(city);
-            return city;
+            return cityList.add(city);
         }
         
-        return null;
+        return false;
     }
     
-    public Hotel AddHotel(String cityName, String hotelName)
+    public boolean AddHotel(String cityName, String hotelName)
     {
-        City city;
-        
         City cityTemp = factory.CreateCity(cityName);
-        if((city = this.FindCity(cityTemp)) == null)
+        City cityExist = FindCity(cityTemp);
+        
+        if(cityExist != null)
         {
-            city = this.AddCity(cityName);
+            return cityExist.AddHotel(hotelName);
         }
         
-        return city.AddHotel(hotelName);
+        return false;
     }
     
-    public Room AddRoom(String cityName, String hotelName, int number, int size, int price)
+    public boolean AddRoom(String cityName, String hotelName, int number, int size, int price)
     {
         City city;
-        
         City cityTemp = factory.CreateCity(cityName);
+        
         if((city = this.FindCity(cityTemp)) == null)
         {
-            return null;
+            return false;
         }
 
         return city.AddRoom(hotelName, number, size, price);
     }
     
-    public Client AddClient(String email, String password)
+    public boolean AddClient(String email, String password)
     {
-        return null;
+        return true;
     }
     
     public City FindCity(City city)

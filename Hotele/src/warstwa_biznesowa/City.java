@@ -19,11 +19,15 @@ public class City {
     
     public List<Hotel> hotelList;
     
+    private Factory factory;
+    
     public City(String name)
     {
         this.name = name;
         
         hotelList = new ArrayList<Hotel>();
+        
+        factory = new Factory();
     }
     
     public void SetName(String name)
@@ -51,18 +55,17 @@ public class City {
         return this.hotelList;
     }
     
-    public Hotel AddHotel(String hotelName)
-    {
-        Factory factory = new Factory();
-        
+    public boolean AddHotel(String hotelName)
+    {    
         Hotel hotel = factory.CreateHotel(hotelName);
-        if(this.FindHotel(hotel) != null)
-        {
-            return null;
-        }
+        Hotel hotelExist = FindHotel(hotel);
         
-        this.hotelList.add(hotel);
-        return hotel;
+        if(hotelExist == null)
+        {
+            return this.hotelList.add(hotel);
+        }
+
+        return false;
     }
     
     public Hotel FindHotel(Hotel hotel)
@@ -75,15 +78,13 @@ public class City {
         return null;
     }
     
-    public Room AddRoom(String hotelName, int number, int size, int price)
+    public boolean AddRoom(String hotelName, int number, int size, int price)
     {
-        Factory factory = new Factory();
-        
         Hotel hotel;
         Hotel hotelTemp = factory.CreateHotel(hotelName);
         if((hotel = this.FindHotel(hotelTemp)) == null)
         {
-            return null;
+            return false;
         }
         
         return hotel.AddRoom(number, size, price);
@@ -100,15 +101,7 @@ public class City {
             return false;
         }
         
-        Reservation reservation = hotel.Reserve(client, date, size, price);
-
-        if(reservation != null)
-        {
-            client.reservationList.add(reservation);
-            return true;
-        }
-        
-        return false;
+        return hotel.Reserve(client, date, size, price);
     }
     
     @Override
