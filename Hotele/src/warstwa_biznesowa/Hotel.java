@@ -108,8 +108,6 @@ public class Hotel {
     
     public boolean Reserve(Client client, Date date, int size, int price)
     {
-        Factory factory = new Factory();
-
         for(Room loopRoom : this.roomList)
         {
             if(loopRoom.CompareAttributes(size, price))
