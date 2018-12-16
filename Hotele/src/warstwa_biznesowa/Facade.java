@@ -176,14 +176,14 @@ public class Facade {
                 client.reservationList.remove(id);
                 return true;
             }
-            else{
-                System.out.print("Minął okres rezerwacji.");
-                return false;
+            else
+            {
+                return false; // Minął okres rezerwacji.
             }
         }
-        else{
-            System.out.print("Brak rezerwacji o podanym numerze.");
-            return false;
+        else
+        {
+            return false; // Brak rezerwacji o podanym numerze.
         }
     }
     
@@ -191,8 +191,8 @@ public class Facade {
     {
     }
     
-    // usuwanie miasta
-    public boolean RemoveCity(String cityName) {
+    public boolean RemoveCity(String cityName)
+    {        
         // pętla po wszystkich miastach, bo (String string : list) nie pójdzie bo klasa, musiałbym pomyśleć ale tak też zadziała
         for(int i =0; i < cityList.size(); i++) {
             if(cityList.get(i).name.equals(cityName)) {
@@ -201,14 +201,14 @@ public class Facade {
                     cityList.remove(i);
                     return true;
                 }
-                else {
-                    System.out.print("Błąd. Miasto zawiera hotele.");
-                    return false;
+                else 
+                {
+                    return false; // Błąd. Miasto zawiera hotele.
                 }
             }
-            else {
-                System.out.print("Błąd. Nie znaleziono takiego miasta.");
-                return false;
+            else
+            {
+                return false; //Błąd. Nie znaleziono takiego miasta.
             }
         }
         return false;
