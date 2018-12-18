@@ -5,22 +5,42 @@
  */
 package warstwa_biznesowa;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author Cezary
  */
 public class Reservation {
-    public Date date;
+    public String number;
+    public LocalDate date;
     private Client client;
     private Room room;
     
-    public Reservation(Date date, Client client, Room room)
+    public Reservation(LocalDate date, Client client, Room room)
     {
         this.date = date;
         this.client = client;
         this.room = room;
+    }
+    
+    public String GenerateNumber()
+    {
+        if(this.client == null)
+            return null;
+        
+        if(this.room == null)
+            return null;
+        
+        if(this.date == null)
+            return null;
+        
+        // client start date + first name + client last name + room number
+        String dateString = date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String number = dateString + "_" + client.email + "_" + room.number;
+        this.number = number;
+        return number;
     }
     
     @Override

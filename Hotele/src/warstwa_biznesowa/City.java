@@ -5,8 +5,8 @@
  */
 package warstwa_biznesowa;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -90,7 +90,7 @@ public class City {
         return hotel.AddRoom(number, size, price);
     }
     
-    public boolean Reserve(Client client, String hotelName, Date date, int size, int price)
+    public boolean Reserve(Client client, String hotelName, LocalDate date, int size, int price)
     {
         Factory factory = new Factory();
         

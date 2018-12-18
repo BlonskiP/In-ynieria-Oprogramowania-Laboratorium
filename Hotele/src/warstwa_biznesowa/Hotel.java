@@ -5,8 +5,8 @@
  */
 package warstwa_biznesowa;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -106,7 +106,7 @@ public class Hotel {
         return null;
     }
     
-    public boolean Reserve(Client client, Date date, int size, int price)
+    public boolean Reserve(Client client, LocalDate date, int size, int price)
     {
         for(Room loopRoom : this.roomList)
         {

@@ -5,9 +5,9 @@
  */
 package warstwa_biznesowa;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +18,6 @@ public class Facade {
     protected List<City> cityList;
     protected List<Client> clientList;
     private Factory factory;
-    private Client client;
 
     public Facade()
     {
@@ -61,13 +60,10 @@ public class Facade {
         }
         
         // rezerwacja
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
         
         // dodanie 3 tygodni ponieważ anulować można najpóxniej 2 tygodnie przed terminem
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.WEEK_OF_MONTH, 3);
-        date = calendar.getTime();
+        date = date.plus(3, ChronoUnit.WEEKS);
         
         boolean test;
         test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
@@ -139,7 +135,7 @@ public class Facade {
         return null;
     }
     
-    public boolean Reserve(String email, String password, String cityName, String hotelName, int size, int price, Date date)
+    public boolean Reserve(String email, String password, String cityName, String hotelName, int size, int price, LocalDate date)
     {
         Client client;
         City city;
@@ -161,7 +157,7 @@ public class Facade {
     
     public boolean CancelReservation(int id)
     {
-        if(client.reservationList.get(id) != null)          // sprzwdzenie czy rezerwacja faktycznie istnieje
+        /*if(client.reservationList.get(id) != null)          // sprzwdzenie czy rezerwacja faktycznie istnieje
         {         
             Date today = new Date();
             Date tmp = client.reservationList.get(id).date; // tworzenie daty do sprawdzenia, czy 
@@ -184,7 +180,8 @@ public class Facade {
         else
         {
             return false; // Brak rezerwacji o podanym numerze.
-        }
+        }*/
+        return false;
     }
     
     public void RemoveClient()

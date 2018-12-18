@@ -6,7 +6,7 @@
 package warstwa_biznesowa;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -86,7 +86,7 @@ public class Room {
         return null;
     }  
     
-    public boolean Reserve(Client client, Date date)
+    public boolean Reserve(Client client, LocalDate date)
     {
         Reservation reservation = factory.CreateReservation(date, client, this);
         if(this.FindReservation(reservation) != null)
@@ -94,9 +94,10 @@ public class Room {
             return false;
         }
         
-        client.reservationList.add(reservation);
+        reservation.GenerateNumber();
+        
         this.reservationList.add(reservation);
-        return true;
+        return client.AddReservation(reservation);
     }
     
     public boolean CompareAttributes(int size, int price)

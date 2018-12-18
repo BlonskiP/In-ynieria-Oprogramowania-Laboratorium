@@ -95,6 +95,11 @@ public class Client {
         return true;
     }
     
+    public boolean AddReservation(Reservation reservation)
+    {
+        return this.reservationList.add(reservation);
+    }
+    
     @Override
     public boolean equals(Object o)
     {
