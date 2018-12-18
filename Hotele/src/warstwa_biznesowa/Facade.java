@@ -156,8 +156,18 @@ public class Facade {
         return city.Reserve(client, hotelName, size, price, startDate, endDate);
     }
     
-    public boolean CancelReservation(int id)
+    public boolean CancelReservation(String email, String password, String reservationNumber)
     {
+        Client client;
+ 
+        Client clientTemp = factory.CreateClient(email, password);
+        if((client = this.FindClient(clientTemp)) == null)
+        {
+            return false;
+        }
+        
+        return client.CancelReservation(reservationNumber);
+        
         /*if(client.reservationList.get(id) != null)          // sprzwdzenie czy rezerwacja faktycznie istnieje
         {         
             Date today = new Date();
@@ -182,7 +192,6 @@ public class Facade {
         {
             return false; // Brak rezerwacji o podanym numerze.
         }*/
-        return false;
     }
     
     public void RemoveClient()

@@ -85,8 +85,6 @@ public class Hotel {
     
     public boolean AddRoom(int number, int size, int price)
     {
-        Factory factory = new Factory();
-        
         Room room = factory.CreateRoom(number, size, price);
         if(this.FindRoom(room) != null)
         {

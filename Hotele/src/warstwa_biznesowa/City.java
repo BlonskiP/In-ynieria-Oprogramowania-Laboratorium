@@ -59,7 +59,6 @@ public class City {
     {    
         Hotel hotel = factory.CreateHotel(hotelName);
         Hotel hotelExist = FindHotel(hotel);
-        
         if(hotelExist == null)
         {
             return this.hotelList.add(hotel);

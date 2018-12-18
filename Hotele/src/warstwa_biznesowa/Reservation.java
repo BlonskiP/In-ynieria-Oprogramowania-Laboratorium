@@ -30,6 +30,11 @@ public class Reservation {
         this.GenerateNumber();
     }
     
+    public Reservation(String number)
+    {
+        this.number = number;
+    }
+    
     public void GenerateNumber()
     {
         // client start date + first name + client last name + room number

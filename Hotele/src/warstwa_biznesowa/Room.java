@@ -101,7 +101,7 @@ public class Room {
     public boolean Reserve(Client client, LocalDate startDate, LocalDate endDate)
     {
         Reservation reservation = factory.CreateReservation(client, this, startDate, endDate);
-        if(this.FindReservationByDate(reservation) != null)
+        if(FindReservationByDate(reservation) != null)
         {
             return false;
         }

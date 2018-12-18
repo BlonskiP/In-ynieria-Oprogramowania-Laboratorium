@@ -5,6 +5,7 @@
  */
 package warstwa_biznesowa;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +23,16 @@ public class Client {
     
     private List<Reservation> reservationList;
     
+    private Factory factory;
+    
     public Client(String email, String password)
     {
         this.email = email;
         this.password = password;
         
         reservationList = new ArrayList<Reservation>();
+        
+        factory = new Factory();
     }
     
     public void SetEmail(String email)
@@ -95,9 +100,39 @@ public class Client {
         return true;
     }
     
+    public Reservation FindReservation(Reservation reservation)
+    {
+        int index = -1;
+        
+        if((index = this.reservationList.indexOf(reservation)) != -1)
+            return this.reservationList.get(index);
+        
+        return null;
+    }
+    
     public boolean Reserve(Reservation reservation)
     {
         return this.reservationList.add(reservation);
+    }
+    
+    public boolean CancelReservation(String reservationNumber)
+    {
+        Reservation reservation;
+        
+        Reservation reservationTemp = factory.CreateReservation(reservationNumber);
+        if((reservation = FindReservation(reservationTemp)) == null)
+        {
+            return false;
+        }
+        
+        /*
+        tutaj tylko sprawdzanie ogarnąć, na LocalDate łatwiej jest sprawdzać .isAfter(), .isBefore(), .compareTo()
+        dodawanie dni jest w main() w Facade
+        
+        potem pobrac pokój z rezerwacjki, odpalic tą samą funkcję na pokoju i pousuwać z list.
+        
+        */
+        return true;
     }
     
     @Override

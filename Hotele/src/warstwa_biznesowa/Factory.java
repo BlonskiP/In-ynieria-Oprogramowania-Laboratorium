@@ -38,4 +38,9 @@ public class Factory {
     {
         return new Reservation(client, room, startDate, endDate); 
     }
+    
+    public Reservation CreateReservation(String number)
+    {
+        return new Reservation(number); 
+    }
 }
