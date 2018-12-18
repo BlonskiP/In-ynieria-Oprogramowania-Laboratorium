@@ -21,7 +21,7 @@ public class Room {
     protected String description;
     protected String photo;
     
-    public List<Reservation> reservationList;
+    private List<Reservation> reservationList;
     
     private Factory factory;
     
@@ -94,10 +94,8 @@ public class Room {
             return false;
         }
         
-        reservation.GenerateNumber();
-        
         this.reservationList.add(reservation);
-        return client.AddReservation(reservation);
+        return client.Reserve(reservation);
     }
     
     public boolean CompareAttributes(int size, int price)

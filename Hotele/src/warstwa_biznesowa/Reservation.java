@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 public class Reservation {
     public String number;
     public LocalDate date;
+    
     private Client client;
     private Room room;
     
@@ -23,24 +24,17 @@ public class Reservation {
         this.date = date;
         this.client = client;
         this.room = room;
+        
+        this.GenerateNumber();
     }
     
-    public String GenerateNumber()
+    public void GenerateNumber()
     {
-        if(this.client == null)
-            return null;
-        
-        if(this.room == null)
-            return null;
-        
-        if(this.date == null)
-            return null;
-        
         // client start date + first name + client last name + room number
         String dateString = date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String number = dateString + "_" + client.email + "_" + room.number;
+        
         this.number = number;
-        return number;
     }
     
     @Override

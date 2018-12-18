@@ -20,7 +20,7 @@ public class Client {
     protected String phone;
     protected String address;
     
-    public List<Reservation> reservationList;
+    private List<Reservation> reservationList;
     
     public Client(String email, String password)
     {
@@ -95,7 +95,7 @@ public class Client {
         return true;
     }
     
-    public boolean AddReservation(Reservation reservation)
+    public boolean Reserve(Reservation reservation)
     {
         return this.reservationList.add(reservation);
     }
