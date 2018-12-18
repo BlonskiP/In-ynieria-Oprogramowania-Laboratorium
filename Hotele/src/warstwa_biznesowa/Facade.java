@@ -59,16 +59,17 @@ public class Facade {
             System.out.println(loopRoom.size + " " + loopRoom.price);
         }
         
-        // rezerwacja
-        LocalDate date = LocalDate.now();
         
-        // dodanie 3 tygodni ponieważ anulować można najpóxniej 2 tygodnie przed terminem
-        date = date.plus(3, ChronoUnit.WEEKS);
+        // ------ REZERWACJA ------
+        
+        // Dodanie do daty początkowej 3 tygodni, ponieważ anulować można tylko max 2 tyg przed datą początkową
+        LocalDate startDate = LocalDate.now().plus(3, ChronoUnit.WEEKS),
+                endDate = startDate.plus(7, ChronoUnit.DAYS);
         
         boolean test;
-        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
+        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
         System.out.println(test); // powinien byc true
-        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, date);
+        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
         System.out.println(test); // powinien byc false
     }
     
@@ -135,7 +136,7 @@ public class Facade {
         return null;
     }
     
-    public boolean Reserve(String email, String password, String cityName, String hotelName, int size, int price, LocalDate date)
+    public boolean Reserve(String email, String password, String cityName, String hotelName, int size, int price, LocalDate startDate, LocalDate endDate)
     {
         Client client;
         City city;
@@ -152,7 +153,7 @@ public class Facade {
             return false;
         }
         
-        return city.Reserve(client, hotelName, date, size, price);
+        return city.Reserve(client, hotelName, size, price, startDate, endDate);
     }
     
     public boolean CancelReservation(int id)

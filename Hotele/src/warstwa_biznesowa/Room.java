@@ -84,12 +84,24 @@ public class Room {
             return this.reservationList.get(index);
         
         return null;
-    }  
+    }
     
-    public boolean Reserve(Client client, LocalDate date)
+    public Reservation FindReservationByDate(Reservation reservation)
     {
-        Reservation reservation = factory.CreateReservation(date, client, this);
-        if(this.FindReservation(reservation) != null)
+        for(Reservation loopReservation : reservationList)
+        {
+            if(reservation.startDate.compareTo(loopReservation.startDate) >= 0 && reservation.startDate.compareTo(loopReservation.endDate) < 0
+                || reservation.endDate.compareTo(loopReservation.startDate) > 0 && reservation.endDate.compareTo(loopReservation.endDate) <= 0)
+                return loopReservation;
+        }
+        
+        return null;
+    }
+    
+    public boolean Reserve(Client client, LocalDate startDate, LocalDate endDate)
+    {
+        Reservation reservation = factory.CreateReservation(client, this, startDate, endDate);
+        if(this.FindReservationByDate(reservation) != null)
         {
             return false;
         }

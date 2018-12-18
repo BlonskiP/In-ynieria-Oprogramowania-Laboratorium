@@ -106,13 +106,13 @@ public class Hotel {
         return null;
     }
     
-    public boolean Reserve(Client client, LocalDate date, int size, int price)
+    public boolean Reserve(Client client, int size, int price, LocalDate startDate, LocalDate endDate)
     {
         for(Room loopRoom : this.roomList)
         {
             if(loopRoom.CompareAttributes(size, price))
             {
-                if(loopRoom.Reserve(client, date))
+                if(loopRoom.Reserve(client, startDate, endDate))
                 {
                     return true;
                 }

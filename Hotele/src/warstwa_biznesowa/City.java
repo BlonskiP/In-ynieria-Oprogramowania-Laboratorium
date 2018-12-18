@@ -90,7 +90,7 @@ public class City {
         return hotel.AddRoom(number, size, price);
     }
     
-    public boolean Reserve(Client client, String hotelName, LocalDate date, int size, int price)
+    public boolean Reserve(Client client, String hotelName, int size, int price, LocalDate startDate, LocalDate endDate)
     {
         Factory factory = new Factory();
         
@@ -101,7 +101,7 @@ public class City {
             return false;
         }
         
-        return hotel.Reserve(client, date, size, price);
+        return hotel.Reserve(client, size, price, startDate, endDate);
     }
     
     @Override

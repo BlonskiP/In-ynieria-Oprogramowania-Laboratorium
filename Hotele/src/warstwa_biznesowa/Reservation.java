@@ -14,24 +14,26 @@ import java.time.format.DateTimeFormatter;
  */
 public class Reservation {
     public String number;
-    public LocalDate date;
+    public LocalDate startDate;
+    public LocalDate endDate;
     
     private Client client;
     private Room room;
     
-    public Reservation(LocalDate date, Client client, Room room)
+    public Reservation(Client client, Room room, LocalDate startDate, LocalDate endDate)
     {
-        this.date = date;
         this.client = client;
         this.room = room;
-        
+        this.startDate = startDate;
+        this.endDate = endDate;
+
         this.GenerateNumber();
     }
     
     public void GenerateNumber()
     {
         // client start date + first name + client last name + room number
-        String dateString = date.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        String dateString = startDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String number = dateString + "_" + client.email + "_" + room.number;
         
         this.number = number;
@@ -41,12 +43,6 @@ public class Reservation {
     public boolean equals(Object o)
     {
         Reservation reservation = (Reservation) o;
-        
-        if(this.date.compareTo(reservation.date) != 0)
-            return false;
-        
-        if(!this.room.equals(reservation.room))
-            return false;
-        return true;
+        return this.number.equals(reservation.number);
     }
 }

@@ -34,8 +34,8 @@ public class Factory {
         return new Room(number, size, price);
     }
     
-    public Reservation CreateReservation(LocalDate date, Client client, Room room)
+    public Reservation CreateReservation(Client client, Room room, LocalDate startDate, LocalDate endDate)
     {
-        return new Reservation(date, client, room); 
+        return new Reservation(client, room, startDate, endDate); 
     }
 }
