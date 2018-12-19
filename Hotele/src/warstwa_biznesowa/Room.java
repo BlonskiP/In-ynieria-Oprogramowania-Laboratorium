@@ -110,9 +110,22 @@ public class Room {
         return client.Reserve(reservation);
     }
     
-    public boolean CancelReservation(Reservation reservation)
+    public boolean RemoveReservation(Reservation reservation)
     {
         return this.reservationList.remove(reservation);
+    }
+    
+    public boolean CancelReservations()
+    {
+        for(Reservation reservation : reservationList)
+        {
+            if(!reservation.Cancel())
+            {
+                return false;
+            }
+        }
+        
+        return true;
     }
     
     public boolean CompareAttributes(int size, int price)

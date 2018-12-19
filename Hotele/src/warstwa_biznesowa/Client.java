@@ -131,8 +131,12 @@ public class Client {
             return false;
         }
         
-        this.reservationList.remove(reservation);
-        return reservation.room.CancelReservation(reservation);
+        return reservation.Cancel();
+    }
+    
+    public boolean RemoveReservation(Reservation reservation)
+    {
+        return reservationList.remove(reservation);
     }
     
     @Override

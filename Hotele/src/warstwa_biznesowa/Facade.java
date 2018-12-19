@@ -208,28 +208,19 @@ public class Facade {
     
     public boolean RemoveCity(String cityName)
     {        
-        // tutja po prostu lecimy po rezerwacjach i anulujemy je
+        City city;
         
-        
-        
-        // pętla po wszystkich miastach, bo (String string : list) nie pójdzie bo klasa, musiałbym pomyśleć ale tak też zadziała
-        for(int i =0; i < cityList.size(); i++) {
-            if(cityList.get(i).name.equals(cityName)) {
-                // sprawdzenie czy miasto ma jakieś hotele
-                if(cityList.get(i).hotelList.isEmpty()) {
-                    cityList.remove(i);
-                    return true;
-                }
-                else 
-                {
-                    return false; // Błąd. Miasto zawiera hotele.
-                }
-            }
-            else
-            {
-                return false; //Błąd. Nie znaleziono takiego miasta.
-            }
+        City cityTemp = factory.CreateCity(cityName);
+        if((city = this.FindCity(cityTemp)) == null)
+        {
+            return false;
         }
-        return false;
+        
+        if(!city.CancelReservations())
+        {
+            return false;
+        }
+        
+        return this.cityList.remove(city);
     }
 }

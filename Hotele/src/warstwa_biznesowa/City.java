@@ -103,6 +103,19 @@ public class City {
         return hotel.Reserve(client, size, price, startDate, endDate);
     }
     
+    public boolean CancelReservations()
+    {
+        for(Hotel hotel : hotelList)
+        {
+            if(!hotel.CancelReservations())
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     @Override
     public boolean equals(Object o)
     {

@@ -120,6 +120,19 @@ public class Hotel {
         return false;
     }
     
+    public boolean CancelReservations()
+    {
+        for(Room room : roomList)
+        {
+            if(!room.CancelReservations())
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     @Override
     public boolean equals(Object o)
     {

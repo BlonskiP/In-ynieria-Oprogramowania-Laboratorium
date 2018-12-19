@@ -44,6 +44,14 @@ public class Reservation {
         this.number = number;
     }
     
+    public boolean Cancel()
+    {
+        this.room.RemoveReservation(this);
+        this.client.RemoveReservation(this);
+        
+        return true;
+    }
+    
     @Override
     public boolean equals(Object o)
     {
