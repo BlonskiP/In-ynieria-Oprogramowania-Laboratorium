@@ -60,7 +60,7 @@ public class Facade {
         }
         
         
-        // ------ REZERWACJA ------
+        // ------ REZERWACJA ------ //
         
         // Dodanie do daty początkowej 3 tygodni, ponieważ anulować można tylko max 2 tyg przed datą początkową
         LocalDate startDate = LocalDate.now().plus(3, ChronoUnit.WEEKS),
@@ -72,13 +72,15 @@ public class Facade {
         test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
         System.out.println(test); // powinien byc false
         
-        // ------ ANULOWANIE ------
+        // ------ ANULOWANIE ------ //
         Room room = hotel.roomList.get(0);
         Reservation reservation = (Reservation) room.GetReservationList().get(0);
         facade.CancelReservation("test@gmail.com", "haslo", reservation.number);
         
         test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
-        System.out.println(test); // powinien byc false
+        System.out.println(test); // powinien byc true
+        
+        // Dopisać jakieś ładniejsze wyświetlanie danych + więcej przypadków
     }
     
     public boolean AddClient(String email, String password)
