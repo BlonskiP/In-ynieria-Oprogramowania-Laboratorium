@@ -110,6 +110,11 @@ public class Room {
         return client.Reserve(reservation);
     }
     
+    public boolean CancelReservation(Reservation reservation)
+    {
+        return this.reservationList.remove(reservation);
+    }
+    
     public boolean CompareAttributes(int size, int price)
     {
         if(this.size != size || this.price != price)

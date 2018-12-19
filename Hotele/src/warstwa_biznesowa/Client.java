@@ -6,6 +6,7 @@
 package warstwa_biznesowa;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,14 +126,13 @@ public class Client {
             return false;
         }
         
-        /*
-        tutaj tylko sprawdzanie ogarnąć, na LocalDate łatwiej jest sprawdzać .isAfter(), .isBefore(), .compareTo()
-        dodawanie dni jest w main() w Facade
+        if(!reservation.startDate.isAfter(LocalDate.now().plus(2, ChronoUnit.WEEKS)))
+        {
+            return false;
+        }
         
-        potem pobrac pokój z rezerwacjki, odpalic tą samą funkcję na pokoju i pousuwać z list.
-        
-        */
-        return true;
+        this.reservationList.remove(reservation);
+        return reservation.room.CancelReservation(reservation);
     }
     
     @Override

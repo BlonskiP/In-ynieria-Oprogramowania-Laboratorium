@@ -71,6 +71,14 @@ public class Facade {
         System.out.println(test); // powinien byc true
         test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
         System.out.println(test); // powinien byc false
+        
+        // ------ ANULOWANIE ------
+        Room room = hotel.roomList.get(0);
+        Reservation reservation = (Reservation) room.GetReservationList().get(0);
+        facade.CancelReservation("test@gmail.com", "haslo", reservation.number);
+        
+        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
+        System.out.println(test); // powinien byc false
     }
     
     public boolean AddCity(String name)

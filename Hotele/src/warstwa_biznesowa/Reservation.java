@@ -17,8 +17,8 @@ public class Reservation {
     public LocalDate startDate;
     public LocalDate endDate;
     
-    private Client client;
-    private Room room;
+    public Client client;
+    public Room room;
     
     public Reservation(Client client, Room room, LocalDate startDate, LocalDate endDate)
     {
