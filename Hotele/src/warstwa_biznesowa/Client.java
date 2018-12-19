@@ -126,7 +126,7 @@ public class Client {
             return false;
         }
         
-        if(!reservation.startDate.isAfter(LocalDate.now().plus(2, ChronoUnit.WEEKS)))
+        if(!reservation.CheckDate())
         {
             return false;
         }

@@ -7,6 +7,7 @@ package warstwa_biznesowa;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -50,6 +51,11 @@ public class Reservation {
         this.client.RemoveReservation(this);
         
         return true;
+    }
+    
+    public boolean CheckDate()
+    {
+        return (startDate.compareTo(LocalDate.now().plus(2, ChronoUnit.WEEKS)) >= 0);
     }
     
     @Override
