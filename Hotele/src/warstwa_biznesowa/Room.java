@@ -109,12 +109,7 @@ public class Room {
         this.reservationList.add(reservation);
         return client.Reserve(reservation);
     }
-    
-    public boolean RemoveReservation(Reservation reservation)
-    {
-        return this.reservationList.remove(reservation);
-    }
-    
+ 
     public boolean CancelReservations()
     {
         for(Reservation reservation : reservationList)
@@ -126,6 +121,11 @@ public class Room {
         }
         
         return true;
+    }
+    
+    public boolean RemoveReservation(Reservation reservation)
+    {
+        return this.reservationList.remove(reservation);
     }
     
     public boolean CompareAttributes(int size, int price)

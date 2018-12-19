@@ -81,6 +81,11 @@ public class Facade {
         System.out.println(test); // powinien byc false
     }
     
+    public boolean AddClient(String email, String password)
+    {
+        return true;
+    }
+    
     public boolean AddCity(String name)
     {
         City city = factory.CreateCity(name);
@@ -119,9 +124,14 @@ public class Facade {
         return city.AddRoom(hotelName, number, size, price);
     }
     
-    public boolean AddClient(String email, String password)
+    public Client FindClient(Client client)
     {
-        return true;
+        int index = -1;
+        
+        if((index = this.clientList.indexOf(client)) != -1)
+            return this.clientList.get(index);
+        
+        return null;
     }
     
     public City FindCity(City city)
@@ -130,16 +140,6 @@ public class Facade {
         
         if((index = this.cityList.indexOf(city)) != -1)
             return this.cityList.get(index);
-        
-        return null;
-    }
-    
-    public Client FindClient(Client client)
-    {
-        int index = -1;
-        
-        if((index = this.clientList.indexOf(client)) != -1)
-            return this.clientList.get(index);
         
         return null;
     }
@@ -175,35 +175,11 @@ public class Facade {
         }
         
         return client.CancelReservation(reservationNumber);
-        
-        /*if(client.reservationList.get(id) != null)          // sprzwdzenie czy rezerwacja faktycznie istnieje
-        {         
-            Date today = new Date();
-            Date tmp = client.reservationList.get(id).date; // tworzenie daty do sprawdzenia, czy 
-            int noOfDays = 14; //i.e two weeks  
-            Calendar calendar = Calendar.getInstance();     // ogólnie czy data rezerwacji + 2 tydodnie jest mniejsza od dzisiaj
-            calendar.setTime(tmp);            
-            calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
-            Date date = calendar.getTime();                 // date = data pobytu + 2 tyg 
-            
-            if(date.compareTo(today) < 0)                   // sprzwdzenie czy są 2 tygodnie przed
-            {                                               // date.compareTo(_date) jest mniejsze od 0 gdy dzisiejsza data jest mniejsza o więcej niż 2 tygodnie od daty pobytu
-                client.reservationList.remove(id);
-                return true;
-            }
-            else
-            {
-                return false; // Minął okres rezerwacji.
-            }
-        }
-        else
-        {
-            return false; // Brak rezerwacji o podanym numerze.
-        }*/
     }
     
-    public void RemoveClient()
+    public boolean RemoveClient(String email, String password)
     {
+        return true;
     }
     
     public boolean RemoveCity(String cityName)
@@ -222,5 +198,15 @@ public class Facade {
         }
         
         return this.cityList.remove(city);
+    }
+    
+    public boolean RemoveHotel(String cityName, String hotelName)
+    {
+        return true;
+    }
+    
+    public boolean RemoveRoom(String cityName, String hotelName, int number)
+    {
+        return true;
     }
 }

@@ -67,16 +67,6 @@ public class City {
         return false;
     }
     
-    public Hotel FindHotel(Hotel hotel)
-    {
-        int index = -1;
-        
-        if((index = this.hotelList.indexOf(hotel)) != -1)
-            return this.hotelList.get(index);
-        
-        return null;
-    }
-    
     public boolean AddRoom(String hotelName, int number, int size, int price)
     {
         Hotel hotel;
@@ -87,6 +77,16 @@ public class City {
         }
         
         return hotel.AddRoom(number, size, price);
+    }
+    
+    public Hotel FindHotel(Hotel hotel)
+    {
+        int index = -1;
+        
+        if((index = this.hotelList.indexOf(hotel)) != -1)
+            return this.hotelList.get(index);
+        
+        return null;
     }
     
     public boolean Reserve(Client client, String hotelName, int size, int price, LocalDate startDate, LocalDate endDate)
