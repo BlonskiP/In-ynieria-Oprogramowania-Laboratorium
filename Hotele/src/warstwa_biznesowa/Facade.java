@@ -200,6 +200,10 @@ public class Facade {
     
     public boolean RemoveCity(String cityName)
     {        
+        // tutja po prostu lecimy po rezerwacjach i anulujemy je
+        
+        
+        
         // pętla po wszystkich miastach, bo (String string : list) nie pójdzie bo klasa, musiałbym pomyśleć ale tak też zadziała
         for(int i =0; i < cityList.size(); i++) {
             if(cityList.get(i).name.equals(cityName)) {
