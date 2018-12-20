@@ -30,8 +30,7 @@ public class Facade {
     {
         Facade facade = new Facade();
        
-        Client client = facade.factory.CreateClient("test@gmail.com", "haslo");
-        facade.clientList.add(client);
+        facade.AddClient("test@gmail.com", "haslo");
         
         // dodawanie miasta
         facade.AddCity("Wrocław");

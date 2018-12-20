@@ -63,8 +63,6 @@ public class City {
         {
             return false;
         }
-        
-        System.out.println(hotel);
 
         return this.hotelList.add(hotel);
     }
