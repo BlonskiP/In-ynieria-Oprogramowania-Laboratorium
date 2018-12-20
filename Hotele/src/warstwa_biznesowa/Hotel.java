@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -86,7 +86,7 @@ public class Hotel {
     public boolean AddRoom(int number, int size, int price)
     {
         Room room = factory.CreateRoom(number, size, price);
-        if(this.FindRoom(room) != null)
+        if(FindRoom(room) != null)
         {
             return false;
         }

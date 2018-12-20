@@ -85,32 +85,40 @@ public class Facade {
     
     public boolean AddClient(String email, String password)
     {
-        return true;
+        Client client = factory.CreateClient(email, password);
+        
+        if(FindClient(client) != null)
+        {
+            return false;
+        }
+  
+        return clientList.add(client);
     }
     
     public boolean AddCity(String name)
     {
         City city = factory.CreateCity(name);
         
-        if(this.FindCity(city) == null)
+        if(FindCity(city) != null)
         {
-            return cityList.add(city);
+            return false;
         }
         
-        return false;
+        return cityList.add(city);
     }
     
     public boolean AddHotel(String cityName, String hotelName)
     {
+        City city;
         City cityTemp = factory.CreateCity(cityName);
-        City cityExist = FindCity(cityTemp);
         
-        if(cityExist != null)
+        if((city = FindCity(cityTemp)) == null)
         {
-            return cityExist.AddHotel(hotelName);
+            return false;
         }
         
-        return false;
+        
+        return city.AddHotel(hotelName);
     }
     
     public boolean AddRoom(String cityName, String hotelName, int number, int size, int price)

@@ -58,20 +58,22 @@ public class City {
     public boolean AddHotel(String hotelName)
     {    
         Hotel hotel = factory.CreateHotel(hotelName);
-        Hotel hotelExist = FindHotel(hotel);
-        if(hotelExist == null)
+        
+        if(FindHotel(hotel) != null)
         {
-            return this.hotelList.add(hotel);
+            return false;
         }
+        
+        System.out.println(hotel);
 
-        return false;
+        return this.hotelList.add(hotel);
     }
     
     public boolean AddRoom(String hotelName, int number, int size, int price)
     {
         Hotel hotel;
         Hotel hotelTemp = factory.CreateHotel(hotelName);
-        if((hotel = this.FindHotel(hotelTemp)) == null)
+        if((hotel = FindHotel(hotelTemp)) == null)
         {
             return false;
         }

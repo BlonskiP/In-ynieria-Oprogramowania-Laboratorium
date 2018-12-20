@@ -58,6 +58,11 @@ public class Reservation {
         return (startDate.compareTo(LocalDate.now().plus(2, ChronoUnit.WEEKS)) >= 0);
     }
     
+    public boolean CompareDates(Reservation reservation)
+    {
+        return this.startDate.compareTo(reservation.startDate) >= 0 && this.startDate.compareTo(reservation.endDate) < 0 || this.endDate.compareTo(reservation.startDate) > 0 && this.endDate.compareTo(reservation.endDate) <= 0;
+    }
+    
     @Override
     public boolean equals(Object o)
     {

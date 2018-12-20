@@ -90,9 +90,10 @@ public class Room {
     {
         for(Reservation loopReservation : reservationList)
         {
-            if(reservation.startDate.compareTo(loopReservation.startDate) >= 0 && reservation.startDate.compareTo(loopReservation.endDate) < 0
-                || reservation.endDate.compareTo(loopReservation.startDate) > 0 && reservation.endDate.compareTo(loopReservation.endDate) <= 0)
+            if(reservation.CompareDates(loopReservation))
+            {
                 return loopReservation;
+            }
         }
         
         return null;
