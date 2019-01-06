@@ -38,9 +38,13 @@ public class Reservation {
     
     public void GenerateNumber()
     {
-        // client start date + first name + client last name + room number
+        // client start date + email + city name + hotel name + room number
         String dateString = startDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        String number = dateString + "_" + client.email + "_" + room.number;
+        
+        String cityName = room.hotel.city.name.replaceAll(" ", "").toLowerCase();
+        String hotelName = room.hotel.name.replaceAll(" ", "").toLowerCase();
+        
+        String number = dateString + "_" + client.email + "_" + cityName + "_" + hotelName + "_" + room.number;
         
         this.number = number;
     }

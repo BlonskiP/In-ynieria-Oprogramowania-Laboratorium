@@ -57,7 +57,7 @@ public class City {
     
     public boolean AddHotel(String hotelName)
     {    
-        Hotel hotel = factory.CreateHotel(hotelName);
+        Hotel hotel = factory.CreateHotel(this, hotelName);
         
         if(FindHotel(hotel) != null)
         {
@@ -70,7 +70,7 @@ public class City {
     public boolean AddRoom(String hotelName, int number, int size, int price)
     {
         Hotel hotel;
-        Hotel hotelTemp = factory.CreateHotel(hotelName);
+        Hotel hotelTemp = factory.CreateHotel(this, hotelName);
         if((hotel = FindHotel(hotelTemp)) == null)
         {
             return false;
@@ -94,7 +94,7 @@ public class City {
         Factory factory = new Factory();
         
         Hotel hotel;
-        Hotel hotelTemp = factory.CreateHotel(hotelName);
+        Hotel hotelTemp = factory.CreateHotel(this, hotelName);
         if((hotel = this.FindHotel(hotelTemp)) == null)
         {
             return false;

@@ -32,54 +32,133 @@ public class Facade {
        
         facade.AddClient("test@gmail.com", "haslo");
         
-        // dodawanie miasta
+        // ------ DODAWANIE MIAST ------ //
+        facade.AddCity("Gdańsk");
+        facade.AddCity("Poznań");
         facade.AddCity("Wrocław");
+        
+        
+        // ------ DODAWANIE HOTELI DO MIAST ------ //
+        
+        // Gdańsk
+        facade.AddHotel("Gdańsk", "Hotel 3 Gwiazdkowy");
+        facade.AddHotel("Gdańsk", "Hotel 4 Gwiazdkowy");
+        facade.AddHotel("Gdańsk", "Hotel 5 Gwiazdkowy");
+        
+        // Poznań
+        facade.AddHotel("Poznań", "Hotel 3 Gwiazdkowy");
+        facade.AddHotel("Poznań", "Hotel 4 Gwiazdkowy");
+        
+        // Wrocław
+        facade.AddHotel("Wrocław", "Hotel 3 Gwiazdkowy");
+        facade.AddHotel("Wrocław", "Hotel 4 Gwiazdkowy");
+        facade.AddHotel("Wrocław", "Hotel 5 Gwiazdkowy");
+        
+        
+        // ------ DODAWANIE POKOI DO HOTELI ------ //
+        
+        facade.AddRoom("Gdańsk", "Hotel 3 Gwiazdkowy", 1, 2, 200);
+        facade.AddRoom("Gdańsk", "Hotel 3 Gwiazdkowy", 2, 2, 200);
+        facade.AddRoom("Gdańsk", "Hotel 3 Gwiazdkowy", 3, 2, 200);
+
+        facade.AddRoom("Gdańsk", "Hotel 4 Gwiazdkowy", 1, 1, 100);
+        facade.AddRoom("Gdańsk", "Hotel 4 Gwiazdkowy", 101, 1, 100);
+        facade.AddRoom("Gdańsk", "Hotel 4 Gwiazdkowy", 2, 2, 200);
+        facade.AddRoom("Gdańsk", "Hotel 4 Gwiazdkowy", 102, 2, 200);
+        facade.AddRoom("Gdańsk", "Hotel 4 Gwiazdkowy", 3, 3, 300);
+        facade.AddRoom("Gdańsk", "Hotel 4 Gwiazdkowy", 103, 3, 300);
+        facade.AddRoom("Gdańsk", "Hotel 4 Gwiazdkowy", 4, 4, 400);
+
+        facade.AddRoom("Poznań", "Hotel 3 Gwiazdkowy", 1, 2, 100);
+        facade.AddRoom("Poznań", "Hotel 3 Gwiazdkowy", 2, 2, 200);
+        facade.AddRoom("Poznań", "Hotel 3 Gwiazdkowy", 3, 2, 300);
+
+        facade.AddRoom("Poznań", "Hotel 4 Gwiazdkowy", 1, 2, 100);
+        facade.AddRoom("Poznań", "Hotel 4 Gwiazdkowy", 2, 2, 200);
+        facade.AddRoom("Poznań", "Hotel 4 Gwiazdkowy", 3, 2, 300);
+        
+        facade.AddRoom("Wrocław", "Hotel 3 Gwiazdkowy", 1, 1, 300);
+        facade.AddRoom("Wrocław", "Hotel 3 Gwiazdkowy", 2, 2, 400);
+        facade.AddRoom("Wrocław", "Hotel 3 Gwiazdkowy", 3, 3, 500);
+
+        facade.AddRoom("Wrocław", "Hotel 4 Gwiazdkowy", 1, 1, 600);
+        facade.AddRoom("Wrocław", "Hotel 4 Gwiazdkowy", 2, 2, 700);
+        facade.AddRoom("Wrocław", "Hotel 4 Gwiazdkowy", 3, 3, 800);
+
+        facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 1, 1, 900);
+        facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 2, 2, 1000);
+        facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 3, 3, 1100);
+        
+        
+        System.out.println("Dane: (Nazwa miasta - Liczba hoteli - Liczba pokoi)");
         for(City loopCity : facade.cityList)
         {
-            System.out.println(loopCity.name);
+            int rooms = 0;
+            for(Hotel loopHotel : loopCity.hotelList)
+            {
+                rooms += loopHotel.roomList.size();
+            }
+            
+            System.out.println("- " + loopCity.name + " - " + loopCity.hotelList.size() + " - " + rooms);
+            
+            for(Hotel loopHotel : loopCity.hotelList)
+            {
+                System.out.println(" - " + loopHotel.name);
+               
+                for(Room loopRoom : loopHotel.roomList)
+                {
+                   System.out.println("  - Nr: " + loopRoom.number + " | Rozmiar: " + loopRoom.size + " | Cena: " + loopRoom.price);
+                }
+            }
+            
+            System.out.println("");
         }
         
-        
-        City city = facade.FindCity(facade.factory.CreateCity("Wrocław"));
-        
-        // dodawanie hotelu
-        facade.AddHotel("Wrocław", "Hotel 5 Gwiazdkowy");
-        for(Hotel loopHotel : city.hotelList)
-        {
-            System.out.println(loopHotel.name);
-        }
-
-        Hotel hotel = city.FindHotel(facade.factory.CreateHotel("Hotel 5 Gwiazdkowy"));
-        
-        // dodawanie pokoju
-        facade.AddRoom("Wrocław", "Hotel 5 Gwiazdkowy", 100, 2, 100);
-        for(Room loopRoom : hotel.roomList)
-        {
-            System.out.println(loopRoom.size + " " + loopRoom.price);
-        }
+        System.out.println("");
         
         
-        // ------ REZERWACJA ------ //
+        
+        // ------ DOKONYWANIE REZERWACJI ------ //
         
         // Dodanie do daty początkowej 3 tygodni, ponieważ anulować można tylko max 2 tyg przed datą początkową
         LocalDate startDate = LocalDate.now().plus(3, ChronoUnit.WEEKS),
                 endDate = startDate.plus(7, ChronoUnit.DAYS);
         
-        boolean test;
-        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
-        System.out.println(test); // powinien byc true
-        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
-        System.out.println(test); // powinien byc false
+        boolean status;
+        System.out.println("Dokonywanie rezerwacji | Miasto: Wrocław | Hotel: Hotel 5 Gwiazdkowy | Rozmiar pokoju: 2 | Cena: 1000");
+        status = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 1000, startDate, endDate);
+        System.out.println((status ? "Zarezerwowano" : "Błąd") + "\n");
         
-        // ------ ANULOWANIE ------ //
-        Room room = hotel.roomList.get(0);
-        Reservation reservation = (Reservation) room.GetReservationList().get(0);
-        facade.CancelReservation("test@gmail.com", "haslo", reservation.number);
+        System.out.println("Dokonywanie rezerwacji | Miasto: Wrocław | Hotel: Hotel 5 Gwiazdkowy | Rozmiar pokoju: 2 | Cena: 1000");
+        status = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 1000, startDate, endDate);
+        System.out.println((status ? "Zarezerwowano" : "Błąd (istnieje rezerwacja na tą datę, nie ma innych takich pokoi)") + "\n");
         
-        test = facade.Reserve("test@gmail.com", "haslo", "Wrocław", "Hotel 5 Gwiazdkowy", 2, 100, startDate, endDate);
-        System.out.println(test); // powinien byc true
+        System.out.println("Dokonywanie rezerwacji | Miasto: Gdańsk | Hotel: Hotel 3 Gwiazdkowy | Rozmiar pokoju: 2 | Cena: 200");
+        status = facade.Reserve("test@gmail.com", "haslo", "Gdańsk", "Hotel 3 Gwiazdkowy", 2, 200, startDate, endDate);
+        System.out.println((status ? "Zarezerwowano" : "Błąd") + "\n");
         
-        // Dopisać jakieś ładniejsze wyświetlanie danych + więcej przypadków
+        System.out.println("Dokonywanie rezerwacji | Miasto: Gdańsk | Hotel: Hotel 3 Gwiazdkowy | Rozmiar pokoju: 2 | Cena: 200");
+        status = facade.Reserve("test@gmail.com", "haslo", "Gdańsk", "Hotel 3 Gwiazdkowy", 2, 200, startDate, endDate);
+        System.out.println((status ? "Zarezerwowano (istnieje rezerwacja ale są inne takie pokoje)" : "Błąd") + "\n");
+        
+        
+        // ------ ANULOWANIE REZERWACJI ------ //
+        
+        Client client = facade.FindClient(facade.factory.CreateClient("test@gmail.com", "haslo"));
+        Reservation reservation = (Reservation) client.GetReservationList().get(0);
+
+        System.out.println("Anulowanie rezerwacji numer: " + reservation.number);
+        status = facade.CancelReservation("test@gmail.com", "haslo", reservation.number);
+        System.out.println((status ? "Anulowano" : "Błąd") + "\n");
+        
+        System.out.println("Anulowanie rezerwacji numer: " + reservation.number);
+        status = facade.CancelReservation("test@gmail.com", "haslo", reservation.number);
+        System.out.println((status ? "Anulowano" : "Błąd (Nie istnieje już taka rezerwacja)") + "\n");
+        
+        reservation = (Reservation) client.GetReservationList().get(0);
+        System.out.println("Anulowanie rezerwacji numer: " + reservation.number);
+        status = facade.CancelReservation("test@gmail.com", "haslo", reservation.number);
+        System.out.println((status ? "Anulowano" : "Błąd (Nie istnieje już taka rezerwacja)") + "\n");
     }
     
     public boolean AddClient(String email, String password)

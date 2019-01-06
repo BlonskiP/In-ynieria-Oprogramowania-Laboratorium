@@ -14,7 +14,9 @@ import java.util.List;
  * @author Cezary
  */
 public class Hotel {
+    protected City city;
     protected String name;
+    
     protected String description;
     protected String address;
     protected int stars;
@@ -24,8 +26,9 @@ public class Hotel {
     
     private Factory factory;
    
-    public Hotel(String name)
+    public Hotel(City city, String name)
     {
+        this.city = city;
         this.name = name;
         
         roomList = new ArrayList<Room>();
@@ -85,7 +88,7 @@ public class Hotel {
     
     public boolean AddRoom(int number, int size, int price)
     {
-        Room room = factory.CreateRoom(number, size, price);
+        Room room = factory.CreateRoom(this, number, size, price);
         if(FindRoom(room) != null)
         {
             return false;

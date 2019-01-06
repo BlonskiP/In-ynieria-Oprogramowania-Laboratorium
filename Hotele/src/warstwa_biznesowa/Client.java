@@ -91,7 +91,7 @@ public class Client {
         return this.address;
     }
     
-    public List GetReservationlist()
+    public List GetReservationList()
     {
         return this.reservationList;
     }

@@ -14,6 +14,7 @@ import java.util.List;
  * @author Cezary
  */
 public class Room {
+    protected Hotel hotel;
     protected int number;
     protected int size;
     protected int price;
@@ -25,8 +26,9 @@ public class Room {
     
     private Factory factory;
     
-    public Room(int number, int size, int price)
+    public Room(Hotel hotel, int number, int size, int price)
     {
+        this.hotel = hotel;
         this.number = number;
         this.size = size;
         this.price = price;

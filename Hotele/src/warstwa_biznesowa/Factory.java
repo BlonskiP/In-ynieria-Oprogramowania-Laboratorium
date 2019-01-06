@@ -24,14 +24,14 @@ public class Factory {
         return new City(name);
     }
     
-    public Hotel CreateHotel(String name)
+    public Hotel CreateHotel(City city, String name)
     {
-        return new Hotel(name);
+        return new Hotel(city, name);
     }
     
-    public Room CreateRoom(int number, int size, int price)
+    public Room CreateRoom(Hotel hotel, int number, int size, int price)
     {
-        return new Room(number, size, price);
+        return new Room(hotel, number, size, price);
     }
     
     public Reservation CreateReservation(Client client, Room room, LocalDate startDate, LocalDate endDate)
