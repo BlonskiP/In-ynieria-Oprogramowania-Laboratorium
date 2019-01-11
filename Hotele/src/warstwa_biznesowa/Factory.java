@@ -12,7 +12,7 @@ import java.time.LocalDate;
  * @author Wilk
  */
 public class Factory {
-    Factory(){};
+    public Factory() {};
     
     public Client CreateClient(String email, String password)
     {
