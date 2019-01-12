@@ -43,7 +43,19 @@ public class HotelTest {
        {
            assertEquals(hotel.roomList.get(i),data.rooms[i]);
        }
-       
     
     }
+    @Test
+    public void FindRoomShouldGiveSpecificRooms()
+    {
+        hotel.roomList.add(data.rooms[0]);
+        hotel.roomList.add(data.rooms[1]);
+        hotel.roomList.add(data.rooms[2]);
+        
+        assertEquals(hotel.FindRoom(data.rooms[0]),data.rooms[0]);
+        assertEquals(hotel.FindRoom(data.rooms[1]),data.rooms[1]);
+        assertEquals(hotel.FindRoom(data.rooms[2]),data.rooms[2]);
+        
+    }
+    
 }
