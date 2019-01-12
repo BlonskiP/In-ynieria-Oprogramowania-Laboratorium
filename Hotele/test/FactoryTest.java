@@ -28,17 +28,18 @@ import warstwa_biznesowa.Factory;
 
 public class FactoryTest {
     Data data;
-    
+    Factory factory;
     @Before
     public void setUp() 
     {
         data = new Data();
+        factory = new Factory(); //Each factory test need factory object
     }
     
     @Test
     public void testCreateClient()
     {
-       Factory factory = new Factory();
+       
 
        Client client = factory.CreateClient("testowy@gmail.com", "haslo");
        assertEquals(data.clients[0], client);
