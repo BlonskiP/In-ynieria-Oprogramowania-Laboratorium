@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Cezary
  */
-public class Client {
+public final class Client {
     protected String email;
     protected String password;
     protected String firstName;

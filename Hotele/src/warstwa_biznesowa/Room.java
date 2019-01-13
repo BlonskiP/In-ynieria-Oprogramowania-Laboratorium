@@ -37,10 +37,10 @@ public class Room {
         
         factory = new Factory();
     }
-    
-    public void SetDescription(String des)
+ 
+    public void SetNumber(int number)
     {
-        this.description = des;
+        this.number = number;
     }
     
     public void SetSize(int size)
@@ -53,9 +53,19 @@ public class Room {
         this.price = price;
     }
     
+    public void SetDescription(String des)
+    {
+        this.description = des;
+    }
+    
     public void SetPhoto(String photo)
     {
         this.photo = photo;
+    }
+    
+    public int GetNumber()
+    {
+        return this.number;
     }
     
     public int GetPrice()

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.util.Arrays;
+import java.util.Collection;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,6 +18,7 @@ import java.util.IllegalFormatCodePointException;
 import org.junit.rules.ExpectedException;
 
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import warstwa_biznesowa.Client;
 import warstwa_biznesowa.Factory;
 
@@ -24,24 +27,39 @@ import warstwa_biznesowa.Factory;
  * @author Cezary
  */
 
-//@Category({TestControl.class, TestEntity.class}) 
+@Category({TestControl.class, TestEntity.class}) 
+@RunWith(Parameterized.class)
 
 public class FactoryTest {
-    Data data;
-    Factory factory;
-    @Before
-    public void setUp() 
+    Data data = new Data();
+    Factory factory = new Factory();
+    
+    @Parameterized.Parameter
+    public int id;
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> data()
     {
-        data = new Data();
-        factory = new Factory(); //Each factory test need factory object
+        Object[][] data1 = new Object[][]{
+            {0}, {1}, {2},
+        };
+        
+        return Arrays.asList(data1);
     }
     
     @Test
     public void testCreateClient()
     {
-       
-
-       Client client = factory.CreateClient("testowy@gmail.com", "haslo");
-       assertEquals(data.clients[0], client);
+        System.out.println("testCreateClient");
+        
+        assertEquals(data.clients[id], factory.CreateClient(data.clientsData[id][0], data.clientsData[id][1]));
+    }
+    
+    @Test
+    public void testCreateCity()
+    {
+        System.out.println("testCreateCity");
+        
+        assertEquals(data.cities[id], factory.CreateCity(data.citiesData[id]));
     }
 }

@@ -41,10 +41,10 @@ public class Reservation {
         // client start date + email + city name + hotel name + room number
         String dateString = startDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         
-        String cityName = room.hotel.city.name.replaceAll(" ", "").toLowerCase();
-        String hotelName = room.hotel.name.replaceAll(" ", "").toLowerCase();
+        String cityName = room.hotel.city.GetName().replaceAll(" ", "").toLowerCase();
+        String hotelName = room.hotel.GetName().replaceAll(" ", "").toLowerCase();
         
-        String number = dateString + "_" + client.email + "_" + cityName + "_" + hotelName + "_" + room.number;
+        String number = dateString + "_" + client.GetEmail() + "_" + cityName + "_" + hotelName + "_" + room.GetNumber();
         
         this.number = number;
     }
