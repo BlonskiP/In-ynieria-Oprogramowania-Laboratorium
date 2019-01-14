@@ -1,6 +1,7 @@
 
 import warstwa_biznesowa.City;
 import warstwa_biznesowa.Client;
+import warstwa_biznesowa.Hotel;
 import warstwa_biznesowa.Room;
 
 /*
@@ -36,6 +37,18 @@ public class Data {
         new City("Wrocław"),
         new City("Poznań"),
         new City("Warszawa"),
+    };
+    
+    public static String hotelsData[][] = new String[][] {
+        {"Wrocław", "Hotel 1 Gwiazdkowy"},
+        {"Poznań", "Hotel 2 Gwiazdkowy"},
+        {"Warszawa", "Hotel 3 Gwiazdkowy"},
+    };
+    
+    public static Hotel hotels[] = {
+        new Hotel(cities[0], "Hotel 1 Gwiazdkowy"),
+        new Hotel(cities[1], "Hotel 2 Gwiazdkowy"),
+        new Hotel(cities[2], "Hotel 3 Gwiazdkowy"),
     };
     
     public static Room rooms[] = {

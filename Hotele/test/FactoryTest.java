@@ -50,16 +50,12 @@ public class FactoryTest {
     @Test
     public void testCreateClient()
     {
-        System.out.println("testCreateClient");
-        
         assertEquals(data.clients[id], factory.CreateClient(data.clientsData[id][0], data.clientsData[id][1]));
     }
     
     @Test
     public void testCreateCity()
     {
-        System.out.println("testCreateCity");
-        
         assertEquals(data.cities[id], factory.CreateCity(data.citiesData[id]));
     }
 }

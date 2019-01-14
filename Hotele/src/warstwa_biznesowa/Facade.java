@@ -15,8 +15,9 @@ import java.util.List;
  * @author Cezary
  */
 public class Facade {
-    protected List<City> cityList;
-    protected List<Client> clientList;
+    public List<City> cityList;
+    public List<Client> clientList;
+    
     private Factory factory;
 
     public Facade()

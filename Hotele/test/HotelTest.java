@@ -26,11 +26,13 @@ public class HotelTest {
     Hotel hotel;
     
     public Room room1;
+    
     @Before
     public void setUp()
     {
         hotel = new Hotel(null,"TestHotel");
     }
+    
     @Test
     public void roomListShouldContainRooms(){
         hotel.AddRoom(1, 1, 50);
@@ -45,6 +47,7 @@ public class HotelTest {
        }
     
     }
+    
     @Test
     public void FindRoomShouldGiveSpecificRooms()
     {
