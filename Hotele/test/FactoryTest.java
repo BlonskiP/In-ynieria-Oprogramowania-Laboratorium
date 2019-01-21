@@ -6,20 +6,12 @@
 
 import java.util.Arrays;
 import java.util.Collection;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.categories.Category;
-import java.util.IllegalFormatCodePointException;
-import org.junit.rules.ExpectedException;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import warstwa_biznesowa.Client;
 import warstwa_biznesowa.Factory;
 
 /**

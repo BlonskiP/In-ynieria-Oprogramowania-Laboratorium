@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import warstwa_biznesowa.City;
 import warstwa_biznesowa.Hotel;
 import warstwa_biznesowa.Room;
 
@@ -58,7 +59,21 @@ public class HotelTest {
         assertEquals(hotel.FindRoom(data.rooms[0]),data.rooms[0]);
         assertEquals(hotel.FindRoom(data.rooms[1]),data.rooms[1]);
         assertEquals(hotel.FindRoom(data.rooms[2]),data.rooms[2]);
-        
     }
     
+    @Test
+    public void testAddRoom() 
+    {
+        Hotel hotel = data.hotels[0];
+        
+        for(int i = 0; i < data.roomsData.length; i++)
+        {
+            assertTrue(hotel.AddRoom(data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
+            assertFalse(hotel.AddRoom(data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
+            
+            Room room = hotel.roomList.get(i);
+            assertEquals(i + 1, hotel.roomList.size());
+            assertEquals(data.rooms[i], hotel.roomList.get(i));
+        }
+    }
 }

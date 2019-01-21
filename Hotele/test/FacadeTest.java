@@ -14,7 +14,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import warstwa_biznesowa.*;
 
-
 /**
  *
  * @author Cezary
@@ -25,14 +24,6 @@ import warstwa_biznesowa.*;
 public class FacadeTest {
     Data data = new Data();
     Facade facade = new Facade();
-    
-    @Before
-    public void setUp()
-    {
-        //facade.AddCity("Wrocław");
-        //facade.AddHotel("Wrocław", "Hotel 5");
-        //facade.AddRoom("Wrocław", "Hotel 5", 1, 2, 100);
-    }
     
     @Test
     public void testAddClient()
@@ -72,4 +63,25 @@ public class FacadeTest {
             assertEquals(data.hotels[i], city.hotelList.get(0));
         }
     }
+    
+    @Test
+    public void testAddRoom()
+    {
+        City city = data.cities[0];
+        Hotel hotel = data.hotels[0];
+        
+        city.hotelList.add(hotel);
+        facade.cityList.add(data.cities[0]);
+        
+        for(int i = 0; i < data.roomsData.length; i++)
+        {
+            assertTrue(facade.AddRoom(city.GetName(), hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
+            assertFalse(facade.AddRoom(city.GetName(), hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
+            
+            Room room = hotel.roomList.get(i);
+            assertEquals(i + 1, hotel.roomList.size());
+            assertEquals(data.rooms[i], hotel.roomList.get(i));
+        }
+    }
+
 }

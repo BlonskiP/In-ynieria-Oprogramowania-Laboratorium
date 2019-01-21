@@ -46,9 +46,9 @@ public class Data {
     };
     
     public static Hotel hotels[] = {
-        new Hotel(cities[0], "Hotel 1 Gwiazdkowy"),
-        new Hotel(cities[1], "Hotel 2 Gwiazdkowy"),
-        new Hotel(cities[2], "Hotel 3 Gwiazdkowy"),
+        new Hotel(null, "Hotel 1 Gwiazdkowy"),
+        new Hotel(null, "Hotel 2 Gwiazdkowy"),
+        new Hotel(null, "Hotel 3 Gwiazdkowy"),
     };
     
     public static Room rooms[] = {
@@ -56,4 +56,11 @@ public class Data {
         new Room(null, 2, 2, 100),
         new Room(null, 3, 3, 150),
     };
+    
+    public static int roomsData[][] = {
+        {1, 1, 50},
+        {2, 1, 100},
+        {3, 1, 150},
+    };
+    
 }//End of Data
