@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import categories.AddRoomTestCategory;
 import categories.ReserveTestCategory;
 import categories.TestControl;
 import categories.TestEntity;
@@ -22,35 +21,15 @@ import warstwa_biznesowa.Room;
 
 /**
  *
- * @author Cezary
+ * @author Blonski
  */
 
-@Category({TestControl.class, TestEntity.class}) 
+@Category({TestControl.class, TestEntity.class})  
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class CityTest {
+public class RoomTest {
     Data data = new Data();
     Facade facade = new Facade();
-
-    @Category({AddRoomTestCategory.class})
-    @Test
-    public void testAddRoom() 
-    {
-        City city = data.cities[0];
-        Hotel hotel = data.hotels[0];
-        
-        city.hotelList.add(hotel);
-        
-        for(int i = 0; i < data.roomsData.length; i++)
-        {
-            assertTrue(city.AddRoom(hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
-            assertFalse(city.AddRoom(hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
-            
-            Room room = hotel.roomList.get(i);
-            assertEquals(i + 1, hotel.roomList.size());
-            assertEquals(data.rooms[i], hotel.roomList.get(i));
-        }
-    }
     
     @Category({ReserveTestCategory.class})
     @Test
@@ -63,7 +42,9 @@ public class CityTest {
         facade.AddRoom(data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][0], data.roomsData[0][1], data.roomsData[0][2]);
         
         City city = facade.cityList.get(0);
+        Hotel hotel = city.hotelList.get(0);
+        Room room = hotel.roomList.get(0);
         
-        assertTrue(city.Reserve(client, data.hotelsData[0][1], data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
+        assertTrue(room.Reserve(client, LocalDate.now(), LocalDate.now()));
     }
 }

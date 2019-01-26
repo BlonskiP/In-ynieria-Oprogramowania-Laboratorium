@@ -1,12 +1,15 @@
-import java.util.Arrays;
-import java.util.Collection;
+import categories.AddRoomTestCategory;
+import categories.ReserveTestCategory;
+import categories.TestControl;
+import categories.TestEntity;
+import java.time.LocalDate;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import warstwa_biznesowa.City;
+import warstwa_biznesowa.Client;
+import warstwa_biznesowa.Facade;
 import warstwa_biznesowa.Hotel;
 import warstwa_biznesowa.Room;
 
@@ -22,9 +25,12 @@ import warstwa_biznesowa.Room;
  * @author Blonski
  */
 
+@Category({TestControl.class, TestEntity.class}) 
+
 public class HotelTest {
     Data data;
     Hotel hotel;
+    Facade facade = new Facade();
     
     public Room room1;
     
@@ -61,8 +67,9 @@ public class HotelTest {
         assertEquals(hotel.FindRoom(data.rooms[2]),data.rooms[2]);
     }
     
+    @Category({AddRoomTestCategory.class})
     @Test
-    public void testAddRoom() 
+    public void testAddRoom()
     {
         Hotel hotel = data.hotels[0];
         
@@ -75,5 +82,21 @@ public class HotelTest {
             assertEquals(i + 1, hotel.roomList.size());
             assertEquals(data.rooms[i], hotel.roomList.get(i));
         }
+    }
+    
+    @Category({ReserveTestCategory.class})
+    @Test
+    public void testReserve()
+    {
+        Client client = data.clients[0];
+        
+        facade.AddCity(data.citiesData[0]);
+        facade.AddHotel(data.citiesData[0], data.hotelsData[0][1]);
+        facade.AddRoom(data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][0], data.roomsData[0][1], data.roomsData[0][2]);
+        
+        City city = facade.cityList.get(0);
+        Hotel hotel = city.hotelList.get(0);
+        
+        assertTrue(hotel.Reserve(client, data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
     }
 }

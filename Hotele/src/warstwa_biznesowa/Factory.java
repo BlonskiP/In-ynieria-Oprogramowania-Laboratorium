@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author Wilk
+ * @author Blonski
  */
 public class Factory {
     public Factory() {};

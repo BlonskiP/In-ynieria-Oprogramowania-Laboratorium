@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import categories.TestControl;
+import categories.TestEntity;
 import java.util.Arrays;
 import java.util.Collection;
 import org.junit.Test;

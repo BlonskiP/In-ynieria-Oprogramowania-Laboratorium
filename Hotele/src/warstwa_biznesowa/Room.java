@@ -83,7 +83,7 @@ public class Room {
         return this.photo;
     }
     
-    public List GetReservationList()
+    public List<Reservation> GetReservationList()
     {
         return this.reservationList;
     }

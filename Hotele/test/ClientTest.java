@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import categories.AddRoomTestCategory;
 import categories.ReserveTestCategory;
 import categories.TestControl;
 import categories.TestEntity;
@@ -17,7 +16,9 @@ import org.junit.runners.MethodSorters;
 import warstwa_biznesowa.City;
 import warstwa_biznesowa.Client;
 import warstwa_biznesowa.Facade;
+import warstwa_biznesowa.Factory;
 import warstwa_biznesowa.Hotel;
+import warstwa_biznesowa.Reservation;
 import warstwa_biznesowa.Room;
 
 /**
@@ -28,29 +29,10 @@ import warstwa_biznesowa.Room;
 @Category({TestControl.class, TestEntity.class}) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-public class CityTest {
+public class ClientTest {
     Data data = new Data();
     Facade facade = new Facade();
-
-    @Category({AddRoomTestCategory.class})
-    @Test
-    public void testAddRoom() 
-    {
-        City city = data.cities[0];
-        Hotel hotel = data.hotels[0];
-        
-        city.hotelList.add(hotel);
-        
-        for(int i = 0; i < data.roomsData.length; i++)
-        {
-            assertTrue(city.AddRoom(hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
-            assertFalse(city.AddRoom(hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
-            
-            Room room = hotel.roomList.get(i);
-            assertEquals(i + 1, hotel.roomList.size());
-            assertEquals(data.rooms[i], hotel.roomList.get(i));
-        }
-    }
+    Factory factory = new Factory();
     
     @Category({ReserveTestCategory.class})
     @Test
@@ -63,7 +45,10 @@ public class CityTest {
         facade.AddRoom(data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][0], data.roomsData[0][1], data.roomsData[0][2]);
         
         City city = facade.cityList.get(0);
+        Hotel hotel = city.hotelList.get(0);
+        Room room = hotel.roomList.get(0);
+        Reservation reservation = factory.CreateReservation(client, room, LocalDate.now(), LocalDate.now());
         
-        assertTrue(city.Reserve(client, data.hotelsData[0][1], data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
+        assertTrue(client.Reserve(reservation));
     }
 }

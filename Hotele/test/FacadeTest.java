@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
+import categories.AddRoomTestCategory;
+import categories.ReserveTestCategory;
+import categories.TestControl;
+import categories.TestEntity;
 import java.time.LocalDate;
-import mockit.*;
-import mockit.integration.junit4.JMockit;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import warstwa_biznesowa.*;
 
@@ -64,6 +65,7 @@ public class FacadeTest {
         }
     }
     
+    @Category({AddRoomTestCategory.class})
     @Test
     public void testAddRoom()
     {
@@ -83,5 +85,16 @@ public class FacadeTest {
             assertEquals(data.rooms[i], hotel.roomList.get(i));
         }
     }
-
+    
+    @Category({ReserveTestCategory.class})
+    @Test
+    public void testReserve()
+    {
+        facade.AddClient(data.clientsData[0][0], data.clientsData[0][1]);
+        facade.AddCity(data.citiesData[0]);
+        facade.AddHotel(data.citiesData[0], data.hotelsData[0][1]);
+        facade.AddRoom(data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][0], data.roomsData[0][1], data.roomsData[0][2]);
+        
+        assertTrue(facade.Reserve(data.clientsData[0][0], data.clientsData[0][1], data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
+    }
 }
