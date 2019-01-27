@@ -24,42 +24,38 @@ import warstwa_biznesowa.*;
 
 public class FacadeTest {
     Data data = new Data();
-    Facade facade = new Facade();
+    Facade facade = data.facade;
     
     @Test
-    public void testAddClient()
+    public void test1AddClient()
     {
         for(int i = 0; i < data.clientsData.length; i++)
         {
-            facade.AddClient(data.clientsData[i][0], data.clientsData[i][1]);
-
+            assertTrue(facade.AddClient(data.clientsData[i][0], data.clientsData[i][1]));
             assertEquals(i + 1, facade.clientList.size());
             assertEquals(data.clients[i], facade.clientList.get(i));
         }
     }
     
     @Test
-    public void testAddCity()
+    public void test2AddCity()
     {
         for(int i = 0; i < data.citiesData.length; i++)
         {
-            facade.AddCity(data.citiesData[i]);
-
+            assertTrue(facade.AddCity(data.citiesData[i]));
             assertEquals(i + 1, facade.cityList.size());
             assertEquals(data.cities[i], facade.cityList.get(i));
         }
     }
     
     @Test
-    public void testAddHotel()
+    public void test3AddHotel()
     {
         for(int i = 0; i < data.hotelsData.length; i++)
         {
-            facade.AddCity(data.citiesData[i]);
-            facade.AddHotel(data.hotelsData[i][0], data.hotelsData[i][1]);
-
             City city = facade.cityList.get(i);
             
+            assertTrue(facade.AddHotel(data.hotelsData[i][0], data.hotelsData[i][1]));
             assertEquals(1, city.hotelList.size());
             assertEquals(data.hotels[i], city.hotelList.get(0));
         }
@@ -67,34 +63,26 @@ public class FacadeTest {
     
     @Category({AddRoomTestCategory.class})
     @Test
-    public void testAddRoom()
+    public void test4AddRoom()
     {
-        City city = data.cities[0];
-        Hotel hotel = data.hotels[0];
-        
-        city.hotelList.add(hotel);
-        facade.cityList.add(data.cities[0]);
-        
         for(int i = 0; i < data.roomsData.length; i++)
         {
+            City city = facade.cityList.get(i);
+            Hotel hotel = city.hotelList.get(0);
+            
             assertTrue(facade.AddRoom(city.GetName(), hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
             assertFalse(facade.AddRoom(city.GetName(), hotel.GetName(), data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
             
-            Room room = hotel.roomList.get(i);
-            assertEquals(i + 1, hotel.roomList.size());
-            assertEquals(data.rooms[i], hotel.roomList.get(i));
+            Room room = hotel.roomList.get(0);
+            assertEquals(1, hotel.roomList.size());
+            assertEquals(data.rooms[i], hotel.roomList.get(0));
         }
     }
     
     @Category({ReserveTestCategory.class})
     @Test
-    public void testReserve()
+    public void test5Reserve()
     {
-        facade.AddClient(data.clientsData[0][0], data.clientsData[0][1]);
-        facade.AddCity(data.citiesData[0]);
-        facade.AddHotel(data.citiesData[0], data.hotelsData[0][1]);
-        facade.AddRoom(data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][0], data.roomsData[0][1], data.roomsData[0][2]);
-        
         assertTrue(facade.Reserve(data.clientsData[0][0], data.clientsData[0][1], data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
     }
 }
