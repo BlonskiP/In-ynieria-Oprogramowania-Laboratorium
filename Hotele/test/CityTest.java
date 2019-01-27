@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-import categories.AddRoomTestCategory;
 import categories.ReserveTestCategory;
 import categories.TestControl;
 import categories.TestEntity;
@@ -18,9 +17,7 @@ import warstwa_biznesowa.City;
 import warstwa_biznesowa.Client;
 import warstwa_biznesowa.Facade;
 import warstwa_biznesowa.Hotel;
-import warstwa_biznesowa.Room;
-
-import categories.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -31,14 +28,21 @@ import categories.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
 public class CityTest {
-    Data data = new Data();
-    Facade facade = new Facade();
+    static Data data;
+    static Facade facade;
     City city = data.cities[0];
     
+    @BeforeClass
+    public static void setUp()
+    {
+        data = new Data();
+        facade = new Facade();
+    }
+
     @Test
     public void test1AddHotel()
     {
-        for(int i = 0; i < data.hotels.length; i++)
+        for(int i = 0; i < data.hotelsData.length; i++)
         {
             assertTrue(city.AddHotel(data.hotelsData[i][1]));
             assertFalse(city.AddHotel(data.hotelsData[i][1]));
@@ -48,7 +52,7 @@ public class CityTest {
         }
     }
 
-    @Category({AddRoomTestCategory.class})
+    //@Category({AddRoomTestCategory.class})
     @Test
     public void test2AddRoom() 
     {
@@ -64,18 +68,12 @@ public class CityTest {
         }
     }
     
-    @Category({ReserveTestCategory.class})
+    //@Category({ReserveTestCategory.class})
     @Test
     public void test3Reserve()
     {
         Client client = data.clients[0];
-        
-        facade.AddCity(data.citiesData[0]);
-        facade.AddHotel(data.citiesData[0], data.hotelsData[0][1]);
-        facade.AddRoom(data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][0], data.roomsData[0][1], data.roomsData[0][2]);
-        
-        City city = facade.cityList.get(0);
-        
+
         assertTrue(city.Reserve(client, data.hotelsData[0][1], data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
     }
 }

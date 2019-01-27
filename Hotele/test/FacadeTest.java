@@ -4,14 +4,17 @@
  * and open the template in the editor.
  */
 
-import categories.AddRoomTestCategory;
-import categories.ReserveTestCategory;
 import categories.TestControl;
 import categories.TestEntity;
 import java.time.LocalDate;
+import mockit.Mocked;
+import mockit.Verifications;
+import mockit.integration.junit4.JMockit;
+import static mockit.internal.expectations.transformation.ActiveInvocations.anyString;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import warstwa_biznesowa.*;
 
@@ -21,10 +24,18 @@ import warstwa_biznesowa.*;
  */
 @Category({TestControl.class, TestEntity.class}) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(JMockit.class)
 
 public class FacadeTest {
-    Data data = new Data();
-    Facade facade = data.facade;
+    static Data data;
+    static Facade facade;
+    
+    @BeforeClass
+    public static void setUp()
+    {
+        data = new Data();
+        facade = new Facade();
+    }
     
     @Test
     public void test1AddClient()
@@ -61,7 +72,7 @@ public class FacadeTest {
         }
     }
     
-    @Category({AddRoomTestCategory.class})
+    //@Category({AddRoomTestCategory.class})
     @Test
     public void test4AddRoom()
     {
@@ -79,10 +90,20 @@ public class FacadeTest {
         }
     }
     
-    @Category({ReserveTestCategory.class})
     @Test
     public void test5Reserve()
     {
         assertTrue(facade.Reserve(data.clientsData[0][0], data.clientsData[0][1], data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
+    }
+    
+    @Test
+    public void test6FindClient(@Mocked Client client)
+    {
+        facade.FindClient(data.clients[0]);
+    
+        new Verifications() {{ 
+            client.equals(any);
+            times = 3;
+        }};
     }
 }
