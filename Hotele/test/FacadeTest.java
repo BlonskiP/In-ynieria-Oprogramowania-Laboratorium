@@ -8,9 +8,9 @@ import categories.TestControl;
 import categories.TestEntity;
 import java.time.LocalDate;
 import mockit.Mocked;
+import mockit.StrictExpectations;
 import mockit.Verifications;
 import mockit.integration.junit4.JMockit;
-import static mockit.internal.expectations.transformation.ActiveInvocations.anyString;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.junit.experimental.categories.Category;
@@ -102,6 +102,31 @@ public class FacadeTest {
         facade.FindClient(data.clients[0]);
     
         new Verifications() {{ 
+            client.equals(any);
+            times = 3;
+        }};
+    }
+    
+    @Test
+    public void test6FindCity(@Mocked City city)
+    {
+        facade.FindCity(data.cities[0]);
+    
+        new Verifications() {{ 
+            city.equals(any);
+            times = 3;
+        }};
+    }
+    
+    @Test
+    public void test7AddClient(@Mocked Factory factory, @Mocked Client client)
+    {
+        facade.AddClient(data.clientsData[0][0], data.clientsData[0][1]);
+    
+        new Verifications() {{ 
+            factory.CreateClient(data.clientsData[0][0], data.clientsData[0][1]);
+            times = 1;
+            
             client.equals(any);
             times = 3;
         }};
