@@ -1,12 +1,13 @@
+import categories.AddRoomTestCategory;
+import categories.ReserveTestCategory;
 import categories.TestControl;
 import categories.TestEntity;
 import java.time.LocalDate;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
+import org.junit.Before;
 import org.junit.experimental.categories.Category;
-import org.junit.runners.MethodSorters;
+import warstwa_biznesowa.City;
 import warstwa_biznesowa.Client;
 import warstwa_biznesowa.Facade;
 import warstwa_biznesowa.Hotel;
@@ -24,25 +25,22 @@ import warstwa_biznesowa.Room;
  * @author Blonski
  */
 
-@Category({TestControl.class, TestEntity.class})
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@Category({TestControl.class, TestEntity.class}) 
 
 public class HotelTest {
-    static Data data;
-    static Facade facade;
+    Data data;
+    Hotel hotel;
+    Facade facade = new Facade();
     
-    static Hotel hotel;
+    public Room room1;
     
-    @BeforeClass
-    public static void setUp()
+    @Before
+    public void setUp()
     {
-        data = new Data();
-        facade = new Facade();
-
-        hotel = data.hotels[0];
+        hotel = new Hotel(null,"TestHotel");
     }
     
-    /*@Test
+    @Test
     public void roomListShouldContainRooms(){
         hotel.AddRoom(1, 1, 50);
         hotel.AddRoom(2, 2, 100);
@@ -67,11 +65,14 @@ public class HotelTest {
         assertEquals(hotel.FindRoom(data.rooms[0]),data.rooms[0]);
         assertEquals(hotel.FindRoom(data.rooms[1]),data.rooms[1]);
         assertEquals(hotel.FindRoom(data.rooms[2]),data.rooms[2]);
-    }*/
+    }
     
+    @Category({AddRoomTestCategory.class})
     @Test
-    public void test1AddRoom()
+    public void testAddRoom()
     {
+        Hotel hotel = data.hotels[0];
+        
         for(int i = 0; i < data.roomsData.length; i++)
         {
             assertTrue(hotel.AddRoom(data.roomsData[i][0], data.roomsData[i][1], data.roomsData[i][2]));
@@ -83,11 +84,19 @@ public class HotelTest {
         }
     }
     
+    @Category({ReserveTestCategory.class})
     @Test
-    public void test2Reserve()
+    public void testReserve()
     {
         Client client = data.clients[0];
-
+        
+        facade.AddCity(data.citiesData[0]);
+        facade.AddHotel(data.citiesData[0], data.hotelsData[0][1]);
+        facade.AddRoom(data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][0], data.roomsData[0][1], data.roomsData[0][2]);
+        
+        City city = facade.cityList.get(0);
+        Hotel hotel = city.hotelList.get(0);
+        
         assertTrue(hotel.Reserve(client, data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
     }
 }

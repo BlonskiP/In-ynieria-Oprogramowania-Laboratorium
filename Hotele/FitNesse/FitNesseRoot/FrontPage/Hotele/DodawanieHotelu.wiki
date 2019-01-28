@@ -1,0 +1,9 @@
+---
+Test
+---
+!|hotelefitnessfixture.TestDodawanieHotelu|
+|daneTestu|dodajHotel?|liczbaHoteli?|
+|Wrocław,DobryHotel|true|1|
+|Wałbrzych,DziwnyHotel|true|1|
+|Warszawa,DobryHotel3|true|1|
+|Krakow,Hotel Ze smokiem|true|1|

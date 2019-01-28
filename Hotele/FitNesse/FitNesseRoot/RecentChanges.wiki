@@ -1,0 +1,5 @@
+|FrontPage.Hotele.Rezerwowanie||24:48:46 Pn, sty 28, 2019|
+|FrontPage.Hotele.DodawaniePokoju||24:16:21 Pn, sty 28, 2019|
+|FrontPage.Hotele.DodawanieHotelu||23:57:12 N, sty 27, 2019|
+|FrontPage.Hotele.SetUp||23:44:25 N, sty 27, 2019|
+|FrontPage.Hotele||23:42:29 N, sty 27, 2019|

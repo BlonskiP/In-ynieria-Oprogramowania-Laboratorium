@@ -1,0 +1,7 @@
+---
+Suite
+---
+!1 Test suite X
+!contents -R2 -g -p -f -h
+"Testy Akceptacyjne systemu zarządzania hotelami"
+!path F:\c#\IO\In-ynieria-Oprogramowania-Laboratorium\Hotele\FitNesse\TestyHotelowFitnesse\build\classes

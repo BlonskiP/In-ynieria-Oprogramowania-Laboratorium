@@ -4,17 +4,14 @@
  * and open the template in the editor.
  */
 
+import categories.AddRoomTestCategory;
+import categories.ReserveTestCategory;
 import categories.TestControl;
 import categories.TestEntity;
 import java.time.LocalDate;
-import mockit.Mocked;
-import mockit.StrictExpectations;
-import mockit.Verifications;
-import mockit.integration.junit4.JMockit;
 import org.junit.*;
 import static org.junit.Assert.*;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import warstwa_biznesowa.*;
 
@@ -24,18 +21,10 @@ import warstwa_biznesowa.*;
  */
 @Category({TestControl.class, TestEntity.class}) 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@RunWith(JMockit.class)
 
 public class FacadeTest {
-    static Data data;
-    static Facade facade;
-    
-    @BeforeClass
-    public static void setUp()
-    {
-        data = new Data();
-        facade = new Facade();
-    }
+    Data data = new Data();
+    Facade facade = data.facade;
     
     @Test
     public void test1AddClient()
@@ -72,7 +61,7 @@ public class FacadeTest {
         }
     }
     
-    //@Category({AddRoomTestCategory.class})
+    @Category({AddRoomTestCategory.class})
     @Test
     public void test4AddRoom()
     {
@@ -90,45 +79,10 @@ public class FacadeTest {
         }
     }
     
+    @Category({ReserveTestCategory.class})
     @Test
     public void test5Reserve()
     {
         assertTrue(facade.Reserve(data.clientsData[0][0], data.clientsData[0][1], data.citiesData[0], data.hotelsData[0][1], data.roomsData[0][1], data.roomsData[0][2], LocalDate.now(), LocalDate.now()));
-    }
-    
-    @Test
-    public void test6FindClient(@Mocked Client client)
-    {
-        facade.FindClient(data.clients[0]);
-    
-        new Verifications() {{ 
-            client.equals(any);
-            times = 3;
-        }};
-    }
-    
-    @Test
-    public void test6FindCity(@Mocked City city)
-    {
-        facade.FindCity(data.cities[0]);
-    
-        new Verifications() {{ 
-            city.equals(any);
-            times = 3;
-        }};
-    }
-    
-    @Test
-    public void test7AddClient(@Mocked Factory factory, @Mocked Client client)
-    {
-        facade.AddClient(data.clientsData[0][0], data.clientsData[0][1]);
-    
-        new Verifications() {{ 
-            factory.CreateClient(data.clientsData[0][0], data.clientsData[0][1]);
-            times = 1;
-            
-            client.equals(any);
-            times = 3;
-        }};
     }
 }

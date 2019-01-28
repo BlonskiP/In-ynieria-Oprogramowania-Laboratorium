@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<testResults>
+  <FitNesseVersion>v20190127</FitNesseVersion>
+  <rootPath>FrontPage.Hotele.Rezerwowanie</rootPath>
+  <result>
+    <counts>
+      <right>0</right>
+      <wrong>0</wrong>
+      <ignores>0</ignores>
+      <exceptions>1</exceptions>
+    </counts>
+    <date>2019-01-28T00:46:09+01:00</date>
+    <runTimeInMillis>14</runTimeInMillis>
+    <content>&lt;div class="collapsible closed"&gt;&lt;ul&gt;&lt;li&gt;&lt;a href='#' class='expandall'&gt;Expand&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href='#' class='collapseall'&gt;Collapse&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+	&lt;p class="title"&gt;Included page: &lt;a href="FrontPage.Hotele.SetUp"&gt;.FrontPage.Hotele.SetUp&lt;/a&gt; &lt;a href="FrontPage.Hotele.SetUp?edit&amp;amp;redirectToReferer=true&amp;amp;redirectAction=" class="edit"&gt;(edit)&lt;/a&gt;&lt;/p&gt;
+	&lt;div&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td&gt;hotelefitnessfixture.SetUp&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td colspan="3"&gt;hotelefitnessfixture.TestDodawanieRezerwacji&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;daneTestu&lt;/td&gt;
+		&lt;td&gt;dodajRezerwacje?&lt;/td&gt;
+		&lt;td&gt;ileRezerwacji?&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+&lt;br/&gt;&lt;table&gt;
+	&lt;tr&gt;
+		&lt;td class="error"&gt;,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;hr/&gt; &lt;span class="fit_label"&gt;Could not find fixture: DobryHotelAdresMailGmailCom1Qaz123.&lt;/span&gt;&lt;/td&gt;
+		&lt;td&gt;false&lt;/td&gt;
+		&lt;td&gt;1&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;false&lt;/td&gt;
+		&lt;td&gt;2&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;false&lt;/td&gt;
+		&lt;td&gt;3&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,,1,2,3&lt;/td&gt;
+		&lt;td&gt;false&lt;/td&gt;
+		&lt;td&gt;4&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,,3&lt;/td&gt;
+		&lt;td&gt;false&lt;/td&gt;
+		&lt;td&gt;5&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,&lt;/td&gt;
+		&lt;td&gt;false&lt;/td&gt;
+		&lt;td&gt;6&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;true&lt;/td&gt;
+		&lt;td&gt;1&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;true&lt;/td&gt;
+		&lt;td&gt;2&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;true&lt;/td&gt;
+		&lt;td&gt;3&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;true&lt;/td&gt;
+		&lt;td&gt;4&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;true&lt;/td&gt;
+		&lt;td&gt;5&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;
+		&lt;td&gt;Warszawa,DobryHotel&lt;a title="create page" href="FrontPage.Hotele.DobryHotel?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;,AdresMail&lt;a title="create page" href="FrontPage.Hotele.AdresMail?edit&amp;amp;nonExistent=true"&gt;[?]&lt;/a&gt;@gmail.com,1qaz,1,2,3&lt;/td&gt;
+		&lt;td&gt;true&lt;/td&gt;
+		&lt;td&gt;6&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+    <relativePageName>Rezerwowanie</relativePageName>
+  </result>
+  <executionLog>
+    <testSystem>fit:fit.FitServer</testSystem>
+    <command>"C:\Program Files (x86)\Java\jdk1.8.0_181\bin\java" -cp F:\c#\IO\In-ynieria-Oprogramowania-Laboratorium\Hotele\FitNesse\fitnesse-standalone.jar;F:\c#\IO\In-ynieria-Oprogramowania-Laboratorium\Hotele\FitNesse\TestyHotelowFitnesse\build\classes fit.FitServer DESKTOP-FRD2T9F 63565 3863</command>
+    <exitCode>1</exitCode>
+    <stdOut></stdOut>
+    <stdErr></stdErr>
+  </executionLog>
+  <finalCounts>
+    <right>0</right>
+    <wrong>0</wrong>
+    <ignores>0</ignores>
+    <exceptions>1</exceptions>
+  </finalCounts>
+  <totalRunTimeInMillis>416</totalRunTimeInMillis>
+</testResults>
+

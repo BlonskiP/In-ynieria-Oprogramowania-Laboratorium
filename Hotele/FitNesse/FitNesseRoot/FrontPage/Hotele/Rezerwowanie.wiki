@@ -1,0 +1,11 @@
+---
+Test
+---
+!|hotelefitnessfixture.TestDodawanieRezerwacji|
+|daneTestu|dodajRezerwacje?|ileRezerwacji?|
+|Warszawa,DobryHotel,AdresMail@gmail.com,1qaz,1,2,3|true|1|
+|Warszawa,DobryHotel,AdresMail@gmail.com,1qaz,1,2,3|true|2|
+|Warszawa,DobryHotel,AdresMail@gmail.com,1qaz,1,2,3|true|3|
+|Warszawa,DobryHotel,AdresMail@gmail.com,1qaz,1,2,3|true|4|
+|Warszawa,DobryHotel,AdresMail@gmail.com,1qaz,1,2,3|true|5|
+|Warszawa,DobryHotel,AdresMail@gmail.com,1qaz,1,2,3|true|6|

@@ -31,6 +31,7 @@ public class RoomTest {
     Data data = new Data();
     Facade facade = new Facade();
     
+    @Category({ReserveTestCategory.class})
     @Test
     public void testReserve()
     {

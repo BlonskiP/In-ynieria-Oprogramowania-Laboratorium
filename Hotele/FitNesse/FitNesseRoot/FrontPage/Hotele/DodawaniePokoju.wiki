@@ -1,0 +1,12 @@
+---
+Test
+---
+!|hotelefitnessfixture.TestDodawaniePokoju|
+|daneTestu|dodajPokoj?|liczbaPokoi?|
+|Warszawa,DobryHotel,2,3,4,5|true|1|
+|,DobryHotel,2,3,4,5|false|0|
+|Warszawa,,2,3,4,5|false|0|
+|Warszawa,DobryHotel,6555,5,2344,2|true|2|
+|Warszawa,DobryHotel,6255,4,2344,3|true|3|
+|Warszawa,DobryHotel,1155,3,2344,4|true|4|
+|Warszawa,DobryHotel,45,5,2344,5|true|5|
